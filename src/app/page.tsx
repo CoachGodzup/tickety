@@ -8,6 +8,7 @@ const App: React.FC = () => {
     <Providers>
     <div>      
       <h1>Welcome to Tickety</h1>
+      <CardEditor></CardEditor>
       <CardList></CardList>
     </div>
     </Providers>
