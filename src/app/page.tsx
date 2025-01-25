@@ -2,15 +2,16 @@ import React from 'react';
 import CardEditor from './component/cardEditor';
 import CardList from './component/cardList';
 import { Providers } from './providers';
+import { Container } from '@mantine/core';
 
 const App: React.FC = () => {
   return (
     <Providers>
-    <div>      
-      <h1>Welcome to Tickety</h1>
-      <CardEditor></CardEditor>
-      <CardList></CardList>
-    </div>
+      <Container>
+        <h1>Welcome to Tickety</h1>
+        <CardEditor></CardEditor>
+        <CardList></CardList>
+      </Container>
     </Providers>
   );
 };

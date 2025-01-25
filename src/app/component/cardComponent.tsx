@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { Card } from '../store/card';
+import { Button, Checkbox, Group, InputLabel, Slider } from '@mantine/core';
 
 interface CardComponentProps {
     card: Card;
@@ -15,13 +16,14 @@ const CardComponent: React.FC<CardComponentProps> = ({ card }) => {
     };
 
     return (
-        <div className="card">
-            <h2>{card.title}</h2>
+        <>
+            <Group>
+                <InputLabel>{card.title}</InputLabel>
+                {card.isDone ? <Checkbox checked /> : <Checkbox />}
+                <Button onClick={handleToggle}>Dettagli</Button>
+            </Group>
             {isToggled ? <p>{card.body}</p> : <></>}
-            {<button onClick={handleToggle}>
-                {isToggled ? 'Hide' : 'Show'} Details
-            </button>}
-        </div>
+        </>
     );
 };
 
