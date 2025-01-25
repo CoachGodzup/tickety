@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import { addCard } from '../store/card.reducer';
-import { Button, Group, Textarea, TextInput } from '@mantine/core';
+import { Button, Center, Container, Group, Textarea, TextInput } from '@mantine/core';
 
 const CardEditor: React.FC = () => {
     const [title, setTitle] = useState('');
@@ -29,22 +29,27 @@ const CardEditor: React.FC = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <h2>Add Card</h2>
-                <TextInput
-                    label="Title"
-                    type="text"
-                    id="title"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                />
-                <Textarea 
-                    label="Body"
-                    id="body"
-                    value={body}
-                    onChange={(e) => setBody(e.target.value)}/>
-                <Button type="submit">Add Card</Button>
-            </form>
+        <Container>
+            <Center>
+                <form onSubmit={handleSubmit}>
+                    <TextInput
+                        label="Title"
+                        type="text"
+                        id="title"
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                    />
+                    <Textarea 
+                        label="Body"
+                        id="body"
+                        value={body}
+                        onChange={(e) => setBody(e.target.value)}/>
+                    <Container style={{'paddingTop': '1em', 'paddingLeft': '0'}}>
+                        <Button type="submit">Add Card</Button>
+                    </Container>
+                </form>
+            </Center>
+        </Container>
     );
 };
 

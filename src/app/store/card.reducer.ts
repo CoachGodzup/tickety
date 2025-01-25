@@ -11,12 +11,12 @@ type CardStore = {
 const initialState: CardStore = {
     cards: [{
         title: 'Test Card',
-        body: 'Test Card',
+        body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lacus felis, vehicula vitae diam ut, hendrerit tempor sem. Quisque tristique, ipsum a hendrerit dictum, nisl felis dictum elit, a tempor sapien odio id nunc. ',
         isDone: false,
         id: '1',
     }, {
         title: 'Test Card 2',
-        body: 'Test Card',
+        body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lacus felis, vehicula vitae diam ut, hendrerit tempor sem. Quisque tristique, ipsum a hendrerit dictum, nisl felis dictum elit, a tempor sapien odio id nunc. ',
         isDone: false,
         id: '2',
     }],
