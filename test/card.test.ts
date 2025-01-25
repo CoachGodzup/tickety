@@ -1,4 +1,4 @@
-import { Card } from '../src/app/components/card';
+import { Card } from '../src/app/store/card';
 
 describe('Card', () => {
     it('should create a card with title, body, and isDone properties', () => {
