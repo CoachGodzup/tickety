@@ -1,8 +1,10 @@
+'use client'
+
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Card } from '../store/card';
 import CardComponent from './cardComponent';
-import { RootState } from '../store/root.reducer';
+import { RootState } from '../store/root.store';
 
 const CardList: React.FC = () => {
     const cards: Card[] = useSelector((state: RootState) => state.cards.cards);

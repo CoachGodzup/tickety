@@ -1,20 +1,37 @@
 import React from 'react';
-import { Provider } from 'react-redux';
 import CardEditor from './component/cardEditor';
 import CardList from './component/cardList';
-import { rootState } from './store/root.reducer'; // Adjust the path as necessary
+import { Providers } from './providers';
 
 const App: React.FC = () => {
   return (
-    <Provider store={rootState}>
-      <div>
+    <Providers>
+    <div>      
       <h1>Welcome to Tickety</h1>
-      {/* Add your components here */}
-      <CardEditor />
-      <CardList />
-      </div>
-    </Provider>
+      <CardList></CardList>
+    </div>
+    </Providers>
   );
 };
 
 export default App;
+
+/*
+
+    <Providers>
+      <div>      
+        <h1>Welcome to Tickety</h1>
+        <CardEditor />
+        <CardList />
+      </div>
+    </Providers>
+
+<Provider store={rootState}>
+      <div>
+      <h1>Welcome to Tickety</h1>
+      <CardEditor />
+      <CardList />
+      </div>
+    </Provider>
+
+*/

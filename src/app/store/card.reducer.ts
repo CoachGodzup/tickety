@@ -9,7 +9,17 @@ type CardStore = {
 
 // Define initial state
 const initialState: CardStore = {
-    cards: [],
+    cards: [{
+        title: 'Test Card',
+        body: 'Test Card',
+        isDone: false,
+        id: '1',
+    }, {
+        title: 'Test Card 2',
+        body: 'Test Card',
+        isDone: false,
+        id: '2',
+    }],
 };
 
 // Create slice
@@ -18,7 +28,9 @@ const cardSlice = createSlice({
     initialState,
     reducers: {
         addCard: (state: CardStore, action: PayloadAction<Card>) => {
-            state.cards.push(action.payload);
+            if (!state.cards.find(card => card.id === action.payload.id)) {
+                state.cards.push(action.payload);
+            }
         },
         toggleCard: (state: CardStore, action: PayloadAction<{ id: string }>) => {
             const card = state.cards.find(card => card.id === action.payload.id);
