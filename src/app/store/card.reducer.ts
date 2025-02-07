@@ -1,5 +1,5 @@
 import { Card } from './card';
-import { configureStore, createSlice, createStore, PayloadAction, UnknownAction } from '@reduxjs/toolkit';
+import { configureStore, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export const CardStore = () => { }
 

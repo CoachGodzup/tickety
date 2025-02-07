@@ -8,7 +8,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install dependencies
-RUN npm install
+RUN npm install -g next
 
 # Copy the rest of the application code
 COPY . .
@@ -17,4 +17,6 @@ COPY . .
 EXPOSE 3000
 
 # Command to run the application
-CMD ["node", "app.js"]
+RUN next build
+
+RUN next start

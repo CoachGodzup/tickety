@@ -4,13 +4,14 @@ import React from 'react';
 import CardEditor from './component/cardEditor';
 import CardList from './component/cardList';
 import { Providers } from './providers';
-import { AppShell, Burger, Button, Container, Divider, Group, NavLink, Skeleton } from '@mantine/core';
+import { Affix, AppShell, Burger,  Button,  Container, Modal, Portal } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import Link from 'next/link';
+import { IconPlus } from '@tabler/icons-react';
 
 const App: React.FC = () => {
   const [opened, { toggle }] = useDisclosure();
-  const [isDark, setDark] = React.useState(false);
+  const [openCardEditor, handleCardEditor] = useDisclosure();
 
   return (
     <Providers>
@@ -29,13 +30,22 @@ const App: React.FC = () => {
         </AppShell.Header>
     
         <AppShell.Main>
-          <Container size='md'>
-            <CardEditor></CardEditor>
-          </Container>
-          <Container size='md'>
+          <Portal>
+            <Affix bottom={50} right={0}>
+              <Button leftSection={<IconPlus size={14} />} size='xl' onClick={handleCardEditor.open} style={{'margin': '1em'}}>Create Card</Button>
+            </Affix>
+            <Modal opened={openCardEditor} onClose={handleCardEditor.close} title="Create Card">
+              <Modal.Body>
+                <CardEditor modalHandler={handleCardEditor}></CardEditor>
+              </Modal.Body>
+            </Modal>
+          </Portal>
+          <Container size='xl'>
             <CardList></CardList>
           </Container>
+          
         </AppShell.Main>
+
         <AppShell.Footer bg={'#111'} c={'#eee'} ta={'center'}>
           <p>Created with 🐾 by <Link style={{'textDecoration': 'none', 'color': '#eee', fontWeight:'b'}} href='https://github.com/CoachGodzup' rel='noreferrer noopener' target='_blank'>CoachGodzup</Link></p>
         </AppShell.Footer>
