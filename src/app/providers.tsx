@@ -4,17 +4,17 @@
 import '@mantine/core/styles.css';
 
 import { Provider } from 'react-redux';
-import { rootStore } from "./store/root.store";
+import { rootStore } from './store/root.store';
 import { MantineProvider } from '@mantine/core';
 
-const theme = {}
+const theme = {};
 
-export const Providers = ({ children } : { children: React.ReactNode }) => {
-    return (
-        <Provider store={rootStore}>
-            <MantineProvider theme={theme} defaultColorScheme='dark'>
-                {children}
-            </MantineProvider>
-        </Provider>
-    );
+export const Providers = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <Provider store={rootStore}>
+      <MantineProvider theme={theme} defaultColorScheme="dark">
+        {children}
+      </MantineProvider>
+    </Provider>
+  );
 };
