@@ -1,9 +1,9 @@
-'use client';
+'use client'
 
-import React from 'react';
-import CardEditor from './component/cardEditor';
-import CardList from './component/cardList';
-import { Providers } from './providers';
+import React from 'react'
+import CardEditor from './component/cardEditor'
+import CardList from './component/cardList'
+import { Providers } from './providers'
 import {
   Affix,
   AppShell,
@@ -12,14 +12,14 @@ import {
   Container,
   Modal,
   Portal,
-} from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
-import Link from 'next/link';
-import { IconPlus } from '@tabler/icons-react';
+} from '@mantine/core'
+import { useDisclosure } from '@mantine/hooks'
+import Link from 'next/link'
+import { IconPlus } from '@tabler/icons-react'
 
 const App: React.FC = () => {
-  const [opened, { toggle }] = useDisclosure();
-  const [openCardEditor, handleCardEditor] = useDisclosure();
+  const [opened, { toggle }] = useDisclosure()
+  const [openCardEditor, handleCardEditor] = useDisclosure()
 
   return (
     <Providers>
@@ -71,7 +71,7 @@ const App: React.FC = () => {
         </AppShell.Footer>
       </AppShell>
     </Providers>
-  );
-};
+  )
+}
 
-export default App;
+export default App

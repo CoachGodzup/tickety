@@ -1,31 +1,30 @@
-'use client';
+'use client'
 
-import React, { useMemo } from 'react';
-import { Card as CardData } from '../store/card';
-import { Card, Group, Title, Text, Menu, ActionIcon } from '@mantine/core';
-import { useDispatch } from 'react-redux';
-import { removeCard, toggleCard } from '../store/card.reducer';
-import { IconDots, IconThumbUp, IconTrash } from '@tabler/icons-react';
+import React, { useMemo } from 'react'
+import { Card as CardData } from '../store/card'
+import { Card, Group, Title, Text, Menu, ActionIcon } from '@mantine/core'
+import { useDispatch } from 'react-redux'
+import { removeCard, toggleCard } from '../store/card.reducer'
+import { IconDots, IconThumbUp, IconTrash } from '@tabler/icons-react'
 
 interface CardComponentProps {
-  card: CardData;
+  card: CardData
 }
 
-type CardMenuActionComponentProps = CardComponentProps;
+type CardMenuActionComponentProps = CardComponentProps
 
 const CardMenuActionComponent: React.FC<CardMenuActionComponentProps> = ({
   card,
 }) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   const removeCardHandler = () => {
-    alert('blah');
-    dispatch(removeCard({ id: card.id }));
-  };
+    dispatch(removeCard({ id: card.id }))
+  }
 
   const isDoneHandler = () => {
-    dispatch(toggleCard({ id: card.id }));
-  };
+    dispatch(toggleCard({ id: card.id }))
+  }
 
   return (
     <Menu withinPortal position="bottom-end" shadow="sm">
@@ -51,8 +50,8 @@ const CardMenuActionComponent: React.FC<CardMenuActionComponentProps> = ({
         </Menu.Item>
       </Menu.Dropdown>
     </Menu>
-  );
-};
+  )
+}
 
 const CardComponent: React.FC<CardComponentProps> = ({ card }) => {
   return useMemo(
@@ -81,7 +80,7 @@ const CardComponent: React.FC<CardComponentProps> = ({ card }) => {
       </Card>
     ),
     [card]
-  );
-};
+  )
+}
 
-export default CardComponent;
+export default CardComponent

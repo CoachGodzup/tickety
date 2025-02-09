@@ -1,11 +1,11 @@
-import { Card } from './card';
-import { configureStore, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { Card } from './card'
+import { configureStore, createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-export const CardStore = () => {};
+export const CardStore = () => {}
 
 type CardStore = {
-  cards: Card[];
-};
+  cards: Card[]
+}
 
 // Define initial state
 const initialState: CardStore = {
@@ -23,7 +23,7 @@ const initialState: CardStore = {
       id: '2',
     },
   ],
-};
+}
 
 // Create slice
 const cardSlice = createSlice({
@@ -32,28 +32,28 @@ const cardSlice = createSlice({
   reducers: {
     addCard: (state: CardStore, action: PayloadAction<Card>) => {
       if (!state.cards.find((card) => card.id === action.payload.id)) {
-        state.cards.push(action.payload);
+        state.cards.push(action.payload)
       }
     },
     toggleCard: (state: CardStore, action: PayloadAction<{ id: string }>) => {
-      const card = state.cards.find((card) => card.id === action.payload.id);
+      const card = state.cards.find((card) => card.id === action.payload.id)
       if (card) {
-        card.isDone = !card.isDone;
+        card.isDone = !card.isDone
       }
     },
     removeCard: (state: CardStore, action: PayloadAction<{ id: string }>) => {
-      state.cards = state.cards.filter((card) => card.id !== action.payload.id);
+      state.cards = state.cards.filter((card) => card.id !== action.payload.id)
     },
   },
-});
+})
 
 // Export actions
-export const { addCard, toggleCard, removeCard } = cardSlice.actions;
+export const { addCard, toggleCard, removeCard } = cardSlice.actions
 
 // Create reducer
-export const cardReducer = cardSlice.reducer;
+export const cardReducer = cardSlice.reducer
 
 // Create store (for testing)
 export const store = configureStore({
   reducer: cardReducer,
-});
+})
