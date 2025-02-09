@@ -1,11 +1,11 @@
 'use client'
 
+import type { Card as CardData } from '../store/card'
+import { ActionIcon, Card, Group, Menu, Text, Title } from '@mantine/core'
+import { IconDots, IconThumbUp, IconTrash } from '@tabler/icons-react'
 import React, { useMemo } from 'react'
-import { Card as CardData } from '../store/card'
-import { Card, Group, Title, Text, Menu, ActionIcon } from '@mantine/core'
 import { useDispatch } from 'react-redux'
 import { removeCard, toggleCard } from '../store/card.reducer'
-import { IconDots, IconThumbUp, IconTrash } from '@tabler/icons-react'
 
 interface CardComponentProps {
   card: CardData
@@ -79,7 +79,7 @@ const CardComponent: React.FC<CardComponentProps> = ({ card }) => {
         </Text>
       </Card>
     ),
-    [card]
+    [card],
   )
 }
 

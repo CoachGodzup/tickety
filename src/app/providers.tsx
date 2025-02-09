@@ -1,16 +1,16 @@
 // https://stackoverflow.com/questions/77400272/setting-up-redux-toolkit-with-next-js-14-0-1
 'use client'
-import React from 'react'
+import { MantineProvider } from '@mantine/core'
 
-import '@mantine/core/styles.css'
+import React from 'react'
 
 import { Provider } from 'react-redux'
 import { rootStore } from './store/root.store'
-import { MantineProvider } from '@mantine/core'
+import '@mantine/core/styles.css'
 
 const theme = {}
 
-export const Providers = ({ children }: { children: React.ReactNode }) => {
+export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <Provider store={rootStore}>
       <MantineProvider theme={theme} defaultColorScheme="dark">

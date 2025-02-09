@@ -1,9 +1,8 @@
-import { Card } from './card'
-import { configureStore, createSlice, PayloadAction } from '@reduxjs/toolkit'
+import type { PayloadAction } from '@reduxjs/toolkit'
+import type { Card } from './card'
+import { configureStore, createSlice } from '@reduxjs/toolkit'
 
-export const CardStore = () => {}
-
-type CardStore = {
+interface CardStore {
   cards: Card[]
 }
 
@@ -31,18 +30,18 @@ const cardSlice = createSlice({
   initialState,
   reducers: {
     addCard: (state: CardStore, action: PayloadAction<Card>) => {
-      if (!state.cards.find((card) => card.id === action.payload.id)) {
+      if (!state.cards.find(card => card.id === action.payload.id)) {
         state.cards.push(action.payload)
       }
     },
     toggleCard: (state: CardStore, action: PayloadAction<{ id: string }>) => {
-      const card = state.cards.find((card) => card.id === action.payload.id)
+      const card = state.cards.find(card => card.id === action.payload.id)
       if (card) {
         card.isDone = !card.isDone
       }
     },
     removeCard: (state: CardStore, action: PayloadAction<{ id: string }>) => {
-      state.cards = state.cards.filter((card) => card.id !== action.payload.id)
+      state.cards = state.cards.filter(card => card.id !== action.payload.id)
     },
   },
 })

@@ -1,9 +1,5 @@
 'use client'
 
-import React from 'react'
-import CardEditor from './component/cardEditor'
-import CardList from './component/cardList'
-import { Providers } from './providers'
 import {
   Affix,
   AppShell,
@@ -14,8 +10,12 @@ import {
   Portal,
 } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
-import Link from 'next/link'
 import { IconPlus } from '@tabler/icons-react'
+import Link from 'next/link'
+import React from 'react'
+import CardEditor from './component/cardEditor'
+import CardList from './component/cardList'
+import { Providers } from './providers'
 
 const App: React.FC = () => {
   const [opened, { toggle }] = useDisclosure()
@@ -56,9 +56,10 @@ const App: React.FC = () => {
           </Container>
         </AppShell.Main>
 
-        <AppShell.Footer bg={'#111'} c={'#eee'} ta={'center'}>
+        <AppShell.Footer bg="#111" c="#eee" ta="center">
           <p>
-            Created with 🐾 by{' '}
+            Created with 🐾 by
+            {' '}
             <Link
               style={{ textDecoration: 'none', color: '#eee', fontWeight: 'b' }}
               href="https://github.com/CoachGodzup"

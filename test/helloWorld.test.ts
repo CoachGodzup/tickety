@@ -1,3 +1,3 @@
-test('returns "Hello, World!"', () => {
-	expect(true).toBeTruthy();
-});
+it('returns "Hello, World!"', () => {
+  expect(true).toBeTruthy()
+})
