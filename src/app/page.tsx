@@ -15,12 +15,12 @@ import Link from 'next/link'
 import React from 'react'
 import CardList from './component/list/cardList'
 import { Providers } from './providers'
+import { Creator } from './component/modal/creator/creator'
 
-const CardEditor = React.lazy(() => import('./component/editor/cardEditor'))
+const CardEditor = React.lazy(() => import('./component/modal/editor/editor'))
 
 const App: React.FC = () => {
   const [opened, { toggle }] = useDisclosure()
-  const [openCardEditor, handleCardEditor] = useDisclosure()
 
   return (
     <Providers>
@@ -31,30 +31,10 @@ const App: React.FC = () => {
         </AppShell.Header>
 
         <AppShell.Main>
-          <Portal>
-            <Affix bottom={50} right={0}>
-              <Button
-                leftSection={<IconPlus size={14} />}
-                size="xl"
-                onClick={handleCardEditor.open}
-                style={{ margin: '1em' }}
-              >
-                Create Card
-              </Button>
-            </Affix>
-            <Modal
-              opened={openCardEditor}
-              onClose={handleCardEditor.close}
-              title="Create Card"
-            >
-              <Modal.Body>
-                <CardEditor modalHandler={handleCardEditor}></CardEditor>
-              </Modal.Body>
-            </Modal>
-          </Portal>
           <Container size="xl">
             <CardList></CardList>
           </Container>
+          <Creator />
         </AppShell.Main>
 
         <AppShell.Footer bg="#111" c="#eee" ta="center">

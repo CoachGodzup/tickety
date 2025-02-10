@@ -7,7 +7,7 @@ import { IconDots, IconEdit, IconThumbDown, IconThumbUp, IconTrash } from '@tabl
 import React, { useMemo } from 'react'
 import { useDispatch } from 'react-redux'
 import { removeCard, toggleCard } from './../store/card.reducer'
-import CardEditor from './editor/cardEditor'
+import CardEditor from './modal/editor/editor'
 
 interface CardComponentProps {
   card: CardData
@@ -40,7 +40,7 @@ const CardMenuActionComponent: React.FC<CardMenuActionComponentProps> = ({
       title="Edit Card"
     >
       <Modal.Body>
-        <CardEditor modalHandler={handleCardEditor} editCard={card}></CardEditor>
+        <CardEditor editCard={card}></CardEditor>
       </Modal.Body>
     </Modal>
   )

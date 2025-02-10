@@ -1,22 +1,18 @@
 'use client'
 
-import type { Card } from '../../store/card'
+import type { Card } from '../../../store/card'
 import { Button, Container, Textarea, TextInput } from '@mantine/core'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { v4 as uuidv4 } from 'uuid'
-import { addCard, editCard as editCardAction } from '../../store/card.reducer'
+import { addCard, editCard as editCardAction } from '../../../store/card.reducer'
 
-export interface CardEditorProps {
-  modalHandler: {
-    readonly open: () => void
-    readonly close: () => void
-    readonly toggle: () => void
-  }
+export interface EditorProps {
+  onSubmit?: () => void
   editCard?: Card
 }
 
-const CardEditor: React.FC<CardEditorProps> = ({ modalHandler, editCard }) => {
+const Editor: React.FC<EditorProps> = ({ onSubmit, editCard }) => {
   const [title, setTitle] = useState(editCard ? editCard.title : '')
   const [body, setBody] = useState(editCard ? editCard.body : '')
   const dispatch = useDispatch()
@@ -44,7 +40,9 @@ const CardEditor: React.FC<CardEditorProps> = ({ modalHandler, editCard }) => {
     e.preventDefault()
     editCard ? handleNewCard() : handleEditCard()
     resetForm()
-    modalHandler.close()
+    if (onSubmit) {
+      onSubmit()
+    }
   }
 
   return (
@@ -71,4 +69,4 @@ const CardEditor: React.FC<CardEditorProps> = ({ modalHandler, editCard }) => {
   )
 }
 
-export default CardEditor
+export default Editor
