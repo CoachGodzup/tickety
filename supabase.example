@@ -1,0 +1,5 @@
+https://supabase.com/docs/guides/api/quickstart
+
+curl 'https://<PROJECT_REF>.supabase.co/rest/v1/todos' \
+-H "apikey: <ANON_KEY>" \
+-H "Authorization: Bearer <ANON_KEY>"
