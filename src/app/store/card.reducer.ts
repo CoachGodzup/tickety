@@ -27,7 +27,7 @@ const cardSlice = createSlice({
       return { ...state, cards: [...state.cards.map(card => card.id === action.payload.id ? { ...card, isDone: !card.isDone } : card)] }
     },
     editCard: (state: CardStore, action: PayloadAction<Card>) => {
-      return { ...state, cards: [...state.cards.map(card => card.id === action.payload.id ? { ...action.payload } : card)] }
+      return { ...state, cards: [...state.cards.map(card => card.id === action.payload.id ? { ...card, ...action.payload } : card)] }
     },
     removeCard: (state: CardStore, action: PayloadAction<{ id: string }>) => {
       return { ...state, cards: state.cards.filter(card => card.id !== action.payload.id) }

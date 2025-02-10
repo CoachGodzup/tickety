@@ -1,11 +1,13 @@
 'use client'
 
-import type { Card as CardData } from '../store/card'
-import { ActionIcon, Card, Group, Menu, Text, Title } from '@mantine/core'
-import { IconDots, IconThumbUp, IconTrash } from '@tabler/icons-react'
+import type { Card as CardData } from './../store/card'
+import { ActionIcon, Card, Group, Menu, Modal, Portal, Text, Title } from '@mantine/core'
+import { useDisclosure } from '@mantine/hooks'
+import { IconDots, IconEdit, IconThumbDown, IconThumbUp, IconTrash } from '@tabler/icons-react'
 import React, { useMemo } from 'react'
 import { useDispatch } from 'react-redux'
-import { removeCard, toggleCard } from '../store/card.reducer'
+import { removeCard, toggleCard } from './../store/card.reducer'
+import CardEditor from './editor/cardEditor'
 
 interface CardComponentProps {
   card: CardData
@@ -17,6 +19,7 @@ const CardMenuActionComponent: React.FC<CardMenuActionComponentProps> = ({
   card,
 }) => {
   const dispatch = useDispatch()
+  const [openCardEditor, handleCardEditor] = useDisclosure()
 
   const removeCardHandler = () => {
     dispatch(removeCard({ id: card.id }))
@@ -26,30 +29,73 @@ const CardMenuActionComponent: React.FC<CardMenuActionComponentProps> = ({
     dispatch(toggleCard({ id: card.id }))
   }
 
-  return (
-    <Menu withinPortal position="bottom-end" shadow="sm">
-      <Menu.Target>
-        <ActionIcon variant="subtle" color="gray">
-          <IconDots size={16} />
-        </ActionIcon>
-      </Menu.Target>
+  const editHandler = () => {
+    handleCardEditor.open()
+  }
 
-      <Menu.Dropdown>
-        <Menu.Item
-          leftSection={<IconThumbUp size={14} />}
-          onClick={isDoneHandler}
-        >
-          {`Set as "Done"`}
-        </Menu.Item>
-        <Menu.Item
-          leftSection={<IconTrash size={14} />}
-          onClick={removeCardHandler}
-          color="red"
-        >
-          Delete
-        </Menu.Item>
-      </Menu.Dropdown>
-    </Menu>
+  const modalCardEditor = (
+    <Modal
+      opened={openCardEditor}
+      onClose={handleCardEditor.close}
+      title="Edit Card"
+    >
+      <Modal.Body>
+        <CardEditor modalHandler={handleCardEditor} editCard={card}></CardEditor>
+      </Modal.Body>
+    </Modal>
+  )
+
+  return (
+    <>
+      <Menu withinPortal position="bottom-end" shadow="sm">
+        <Menu.Target>
+          <ActionIcon variant="subtle" color="gray">
+            <IconDots size={16} />
+          </ActionIcon>
+        </Menu.Target>
+
+        <Menu.Dropdown>
+          <Menu.Item
+            leftSection={<IconEdit size={14} />}
+            onClick={editHandler}
+          >
+            Edit
+          </Menu.Item>
+
+          {
+            card.isDone
+              ? (
+                  <Menu.Item
+                    leftSection={<IconThumbDown size={14} />}
+                    onClick={isDoneHandler}
+                  >
+                    {`Set as "Todo"`}
+                  </Menu.Item>
+                )
+              : (
+                  <Menu.Item
+                    leftSection={<IconThumbUp size={14} />}
+                    onClick={isDoneHandler}
+                  >
+                    {`Set as "Done"`}
+                  </Menu.Item>
+                )
+          }
+
+          <Menu.Item
+            leftSection={<IconTrash size={14} />}
+            onClick={removeCardHandler}
+            color="red"
+          >
+            Delete
+          </Menu.Item>
+        </Menu.Dropdown>
+      </Menu>
+      <Portal>
+        {modalCardEditor}
+      </Portal>
+    </>
+
   )
 }
 
@@ -59,6 +105,7 @@ const CardComponent: React.FC<CardComponentProps> = ({ card }) => {
       <Card
         withBorder
         shadow="sm"
+        padding={20}
         style={{ width: 340, height: 400, overflow: 'auto', margin: 'auto' }}
       >
         <Card.Section p={20}>
@@ -77,6 +124,7 @@ const CardComponent: React.FC<CardComponentProps> = ({ card }) => {
         >
           {card.body}
         </Text>
+        <pre>{card.id}</pre>
       </Card>
     ),
     [card],

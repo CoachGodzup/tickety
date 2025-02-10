@@ -1,10 +1,11 @@
 'use client'
 
+import type { Card } from '../../store/card'
 import { Button, Container, Textarea, TextInput } from '@mantine/core'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { v4 as uuidv4 } from 'uuid'
-import { addCard } from '../store/card.reducer'
+import { addCard, editCard as editCardAction } from '../../store/card.reducer'
 
 export interface CardEditorProps {
   modalHandler: {
@@ -12,11 +13,12 @@ export interface CardEditorProps {
     readonly close: () => void
     readonly toggle: () => void
   }
+  editCard?: Card
 }
 
-const CardEditor: React.FC<CardEditorProps> = ({ modalHandler }) => {
-  const [title, setTitle] = useState('')
-  const [body, setBody] = useState('')
+const CardEditor: React.FC<CardEditorProps> = ({ modalHandler, editCard }) => {
+  const [title, setTitle] = useState(editCard ? editCard.title : '')
+  const [body, setBody] = useState(editCard ? editCard.body : '')
   const dispatch = useDispatch()
 
   const resetForm = () => {
@@ -24,8 +26,11 @@ const CardEditor: React.FC<CardEditorProps> = ({ modalHandler }) => {
     setBody('')
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
+  const handleEditCard = () => {
+    dispatch(editCardAction({ ...editCard as Card, title, body }))
+  }
+
+  const handleNewCard = () => {
     const newCard = {
       id: uuidv4(),
       title,
@@ -33,6 +38,11 @@ const CardEditor: React.FC<CardEditorProps> = ({ modalHandler }) => {
       isDone: false,
     }
     dispatch(addCard(newCard))
+  }
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    editCard ? handleNewCard() : handleEditCard()
     resetForm()
     modalHandler.close()
   }
@@ -54,7 +64,7 @@ const CardEditor: React.FC<CardEditorProps> = ({ modalHandler }) => {
           onChange={e => setBody(e.target.value)}
         />
         <Container style={{ paddingTop: '1em', paddingLeft: '0' }}>
-          <Button type="submit">Add Card</Button>
+          <Button type="submit">{editCard ? 'Edit Card' : 'Add Card'}</Button>
         </Container>
       </form>
     </Container>

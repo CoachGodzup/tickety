@@ -13,10 +13,10 @@ import { useDisclosure } from '@mantine/hooks'
 import { IconPlus } from '@tabler/icons-react'
 import Link from 'next/link'
 import React from 'react'
-import CardList from './component/cardList'
+import CardList from './component/list/cardList'
 import { Providers } from './providers'
 
-const CardEditor = React.lazy(() => import('./component/cardEditor'))
+const CardEditor = React.lazy(() => import('./component/editor/cardEditor'))
 
 const App: React.FC = () => {
   const [opened, { toggle }] = useDisclosure()
