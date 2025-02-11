@@ -27,13 +27,14 @@ export const ModalEditor: React.FC<ModalEditorProps> = ({
   }
 
   return (
-    <Modal opened={isOpen} onClose={modalHandler.close} title="Edit Card">
+    <Modal opened={isOpen} withOverlay onClose={modalHandler.close} title="Edit Card">
       <Modal.Body>
         <Suspense fallback="Loading...">
           <Editor
             onSubmit={onSubmitWithModalHandler}
             editCard={editCard}
-          ></Editor>
+          >
+          </Editor>
         </Suspense>
       </Modal.Body>
     </Modal>

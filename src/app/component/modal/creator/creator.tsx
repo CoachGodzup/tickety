@@ -24,6 +24,7 @@ export const Creator: React.FC<CreatorProps> = ({ onSubmit }) => {
       <Modal
         opened={openCardEditor}
         onClose={handleCardEditor.close}
+        withOverlay
         title="Create Card"
       >
         <Modal.Body>

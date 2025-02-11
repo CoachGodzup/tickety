@@ -1,8 +1,8 @@
 'use client'
 
-import { AppShell, Container } from '@mantine/core'
-import Link from 'next/link'
+import { AppShell, Container, Group } from '@mantine/core'
 import React, { Suspense } from 'react'
+import { ColorSchemeSwitch } from './component/colorSchemeSwitch/colorSchemeSwitch'
 import { MyFooter } from './component/footer/MyFooter'
 import CardList from './component/list/cardList'
 import { Creator } from './component/modal/creator/creator'
@@ -13,7 +13,10 @@ const App: React.FC = () => {
     <Providers>
       <AppShell header={{ height: 60 }} padding="md">
         <AppShell.Header>
-          <h3 style={{ paddingLeft: '1em' }}>Tickety</h3>
+          <Group>
+            <h3 style={{ paddingLeft: '1em' }}>Tickety</h3>
+            <ColorSchemeSwitch></ColorSchemeSwitch>
+          </Group>
         </AppShell.Header>
 
         <AppShell.Main>
@@ -25,7 +28,7 @@ const App: React.FC = () => {
           <Creator />
         </AppShell.Main>
 
-        <AppShell.Footer bg="#111" c="#eee" ta="center" pt={{}}>
+        <AppShell.Footer bg="#111" c="#eee" ta="center">
           <MyFooter></MyFooter>
         </AppShell.Footer>
       </AppShell>

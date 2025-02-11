@@ -16,7 +16,7 @@ const CardList: React.FC = () => {
   )
 
   return (
-    <Flex gap="md" rowGap="md" columnGap="md" wrap="wrap">
+    <Flex gap="md" rowGap="md" columnGap="md" wrap="wrap" direction="row">
       {cardListElements}
     </Flex>
   )
