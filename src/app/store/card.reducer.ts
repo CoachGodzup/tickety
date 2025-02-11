@@ -18,22 +18,34 @@ const cardSlice = createSlice({
   initialState,
   reducers: {
     addCard: (state: CardStore, action: PayloadAction<Card>) => {
-      if (state.cards.find(card => card.id === action.payload.id)) {
+      if (state.cards.find((card) => card.id === action.payload.id)) {
         return state
       }
       return { ...state, cards: [...state.cards, action.payload] }
     },
-    toggleCard: (state: CardStore, action: PayloadAction<{ id: string }>) => {
-      return { ...state, cards: [...state.cards.map(card => card.id === action.payload.id ? { ...card, isDone: !card.isDone } : card)] }
-    },
-    editCard: (state: CardStore, action: PayloadAction<Card>) => {
-      return { ...state, cards: [...state.cards.map(card => card.id === action.payload.id ? { ...card, ...action.payload } : card)] }
-    },
-    removeCard: (state: CardStore, action: PayloadAction<{ id: string }>) => {
-      return { ...state, cards: state.cards.filter(card => card.id !== action.payload.id) }
-    },
+    toggleCard: (state: CardStore, action: PayloadAction<{ id: string }>) => ({
+      ...state,
+      cards: [
+        ...state.cards.map((card) =>
+          card.id === action.payload.id
+            ? { ...card, isDone: !card.isDone }
+            : card
+        ),
+      ],
+    }),
+    editCard: (state: CardStore, action: PayloadAction<Card>) => ({
+      ...state,
+      cards: [
+        ...state.cards.map((card) =>
+          card.id === action.payload.id ? action.payload : card
+        ),
+      ],
+    }),
+    removeCard: (state: CardStore, action: PayloadAction<{ id: string }>) => ({
+      ...state,
+      cards: state.cards.filter((card) => card.id !== action.payload.id),
+    }),
   },
-
 })
 
 // Export actions

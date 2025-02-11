@@ -1,13 +1,29 @@
 'use client'
 
 import type { Card as CardData } from './../store/card'
-import { ActionIcon, Card, Group, Menu, Modal, Portal, Text, Title } from '@mantine/core'
+import {
+  ActionIcon,
+  Card,
+  Group,
+  Menu,
+  Modal,
+  Portal,
+  Text,
+  Title,
+} from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
-import { IconDots, IconEdit, IconThumbDown, IconThumbUp, IconTrash } from '@tabler/icons-react'
+import {
+  IconDots,
+  IconEdit,
+  IconThumbDown,
+  IconThumbUp,
+  IconTrash,
+} from '@tabler/icons-react'
 import React, { useMemo } from 'react'
 import { useDispatch } from 'react-redux'
 import { removeCard, toggleCard } from './../store/card.reducer'
-import CardEditor from './modal/editor/editor'
+
+const ModalEditor = React.lazy(() => import('./modal/editor/modalEditor'))
 
 interface CardComponentProps {
   card: CardData
@@ -33,18 +49,6 @@ const CardMenuActionComponent: React.FC<CardMenuActionComponentProps> = ({
     handleCardEditor.open()
   }
 
-  const modalCardEditor = (
-    <Modal
-      opened={openCardEditor}
-      onClose={handleCardEditor.close}
-      title="Edit Card"
-    >
-      <Modal.Body>
-        <CardEditor editCard={card}></CardEditor>
-      </Modal.Body>
-    </Modal>
-  )
-
   return (
     <>
       <Menu withinPortal position="bottom-end" shadow="sm">
@@ -55,32 +59,25 @@ const CardMenuActionComponent: React.FC<CardMenuActionComponentProps> = ({
         </Menu.Target>
 
         <Menu.Dropdown>
-          <Menu.Item
-            leftSection={<IconEdit size={14} />}
-            onClick={editHandler}
-          >
+          <Menu.Item leftSection={<IconEdit size={14} />} onClick={editHandler}>
             Edit
           </Menu.Item>
 
-          {
-            card.isDone
-              ? (
-                  <Menu.Item
-                    leftSection={<IconThumbDown size={14} />}
-                    onClick={isDoneHandler}
-                  >
-                    {`Set as "Todo"`}
-                  </Menu.Item>
-                )
-              : (
-                  <Menu.Item
-                    leftSection={<IconThumbUp size={14} />}
-                    onClick={isDoneHandler}
-                  >
-                    {`Set as "Done"`}
-                  </Menu.Item>
-                )
-          }
+          {card.isDone ? (
+            <Menu.Item
+              leftSection={<IconThumbDown size={14} />}
+              onClick={isDoneHandler}
+            >
+              {`Set as "Todo"`}
+            </Menu.Item>
+          ) : (
+            <Menu.Item
+              leftSection={<IconThumbUp size={14} />}
+              onClick={isDoneHandler}
+            >
+              {`Set as "Done"`}
+            </Menu.Item>
+          )}
 
           <Menu.Item
             leftSection={<IconTrash size={14} />}
@@ -92,10 +89,13 @@ const CardMenuActionComponent: React.FC<CardMenuActionComponentProps> = ({
         </Menu.Dropdown>
       </Menu>
       <Portal>
-        {modalCardEditor}
+        <ModalEditor
+          modalHandler={handleCardEditor}
+          editCard={card}
+          isOpen={openCardEditor}
+        ></ModalEditor>
       </Portal>
     </>
-
   )
 }
 
@@ -127,7 +127,7 @@ const CardComponent: React.FC<CardComponentProps> = ({ card }) => {
         <pre>{card.id}</pre>
       </Card>
     ),
-    [card],
+    [card]
   )
 }
 

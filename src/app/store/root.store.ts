@@ -23,9 +23,10 @@ const defaultState = [
 ]
 
 export const rootStore = configureStore({
-  preloadedState: preloadedState ? { cards: JSON.parse(preloadedState) } : defaultState,
+  preloadedState: { cards: preloadedState ? JSON.parse(preloadedState) : { cards: defaultState } },
   reducer: rootReducer,
-  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(sessionStorageMiddleware.middleware),
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware().concat(sessionStorageMiddleware.middleware),
 })
 
 export type RootState = ReturnType<typeof rootStore.getState>

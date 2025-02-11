@@ -1,36 +1,40 @@
 import type { EditorProps } from './editor'
 import { Modal } from '@mantine/core'
-import { useDisclosure } from '@mantine/hooks'
-import React, { useEffect } from 'react'
+import React, { Suspense } from 'react'
 
 const Editor = React.lazy(() => import('./editor'))
 
 interface ModalEditorProps extends EditorProps {
-    isOpen: boolean 
+  modalHandler: {
+    readonly open: () => void
+    readonly close: () => void
+    readonly toggle: () => void
+  }
+  isOpen: boolean
 }
 
-export const ModalEditor: React.FC<ModalEditorProps> = ({ onSubmit, editCard, isOpen }) => {
-  const [openCardEditor, handleCardEditor] = useDisclosure(isOpen)
-
-  useEffect(() => {
-    isOpen ? handleCardEditor.open() : handleCardEditor.close()
-  }, [])
-
+export const ModalEditor: React.FC<ModalEditorProps> = ({
+  onSubmit,
+  editCard,
+  modalHandler,
+  isOpen,
+}) => {
   const onSubmitWithModalHandler = () => {
     if (onSubmit) {
       onSubmit()
     }
-    handleCardEditor.close()
+    modalHandler.close()
   }
 
   return (
-    <Modal
-      opened={openCardEditor}
-      onClose={handleCardEditor.close}
-      title= {editCard ? "Edit Card" : "Create Card"}
-    >
+    <Modal opened={isOpen} onClose={modalHandler.close} title="Edit Card">
       <Modal.Body>
-        <Editor onSubmit={onSubmitWithModalHandler} editCard={editCard}></Editor>
+        <Suspense fallback="Loading...">
+          <Editor
+            onSubmit={onSubmitWithModalHandler}
+            editCard={editCard}
+          ></Editor>
+        </Suspense>
       </Modal.Body>
     </Modal>
   )

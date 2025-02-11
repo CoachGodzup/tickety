@@ -5,7 +5,10 @@ import { Button, Container, Textarea, TextInput } from '@mantine/core'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { v4 as uuidv4 } from 'uuid'
-import { addCard, editCard as editCardAction } from '../../../store/card.reducer'
+import {
+  addCard,
+  editCard as editCardAction,
+} from '../../../store/card.reducer'
 
 export interface EditorProps {
   onSubmit?: () => void
@@ -23,7 +26,7 @@ const Editor: React.FC<EditorProps> = ({ onSubmit, editCard }) => {
   }
 
   const handleEditCard = () => {
-    dispatch(editCardAction({ ...editCard as Card, title, body }))
+    dispatch(editCardAction({ ...(editCard as Card), title, body }))
   }
 
   const handleNewCard = () => {
@@ -38,7 +41,7 @@ const Editor: React.FC<EditorProps> = ({ onSubmit, editCard }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    editCard ? handleNewCard() : handleEditCard()
+    editCard ? handleEditCard() : handleNewCard()
     resetForm()
     if (onSubmit) {
       onSubmit()
@@ -53,13 +56,13 @@ const Editor: React.FC<EditorProps> = ({ onSubmit, editCard }) => {
           type="text"
           id="title"
           value={title}
-          onChange={e => setTitle(e.target.value)}
+          onChange={(e) => setTitle(e.target.value)}
         />
         <Textarea
           label="Body"
           id="body"
           value={body}
-          onChange={e => setBody(e.target.value)}
+          onChange={(e) => setBody(e.target.value)}
         />
         <Container style={{ paddingTop: '1em', paddingLeft: '0' }}>
           <Button type="submit">{editCard ? 'Edit Card' : 'Add Card'}</Button>

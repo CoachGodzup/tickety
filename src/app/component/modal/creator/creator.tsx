@@ -1,14 +1,14 @@
+import type { EditorProps } from '../editor/editor'
 import { Modal, Portal } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
-import React from 'react'
-import { EditorProps } from '../editor/editor'
+import React, { Suspense } from 'react'
 import { CreateCardButton } from './createCardButton'
 
 const Editor = React.lazy(() => import('../editor/editor'))
 
 interface CreatorProps extends EditorProps {}
 
-export const Creator: React.FC<CreatorProps> = ({onSubmit}) => {
+export const Creator: React.FC<CreatorProps> = ({ onSubmit }) => {
   const [openCardEditor, handleCardEditor] = useDisclosure()
 
   const onSubmitWithModalHandler = () => {
@@ -20,16 +20,18 @@ export const Creator: React.FC<CreatorProps> = ({onSubmit}) => {
 
   return (
     <Portal>
-      {<CreateCardButton onClick={handleCardEditor.open} />}
+      <CreateCardButton onClick={handleCardEditor.open} />
       <Modal
         opened={openCardEditor}
         onClose={handleCardEditor.close}
-        title= {"Create Card"}
+        title="Create Card"
       >
         <Modal.Body>
-          <Editor onSubmit={onSubmitWithModalHandler}></Editor>
+          <Suspense fallback="Loading...">
+            <Editor onSubmit={onSubmitWithModalHandler}></Editor>
+          </Suspense>
         </Modal.Body>
-      </Modal>    
+      </Modal>
     </Portal>
   )
 }

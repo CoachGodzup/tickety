@@ -9,6 +9,6 @@ sessionStorageMiddleware.startListening({
   effect: (_, listenerApi) =>
     sessionStorage.setItem(
       'todo',
-      JSON.stringify((listenerApi.getState() as RootState).cards),
+      JSON.stringify((listenerApi.getState() as RootState).cards)
     ),
 })
