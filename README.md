@@ -5,6 +5,7 @@ A simple TODO list in Next JS, React and Typescript.
 ![Tickety Screenshot](./assets/tickety-screenshot.png)
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+It uses [Mantine library](https://mantine.dev/) for UI and [Redux Toolkit](https://redux-toolkit.js.org/) to manage the state.
 
 ## Getting Started
 
