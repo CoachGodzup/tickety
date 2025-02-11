@@ -1,6 +1,6 @@
 'use client'
 
-import type { Card as CardData } from './../store/card'
+import type { Card as CardData } from '../../store/card'
 import {
   ActionIcon,
   Card,
@@ -8,6 +8,7 @@ import {
   Menu,
   Modal,
   Portal,
+  Stack,
   Text,
   Title,
 } from '@mantine/core'
@@ -21,9 +22,9 @@ import {
 } from '@tabler/icons-react'
 import React, { useMemo } from 'react'
 import { useDispatch } from 'react-redux'
-import { removeCard, toggleCard } from './../store/card.reducer'
+import { removeCard, toggleCard } from '../../store/card.reducer'
 
-const ModalEditor = React.lazy(() => import('./modal/editor/modalEditor'))
+const ModalEditor = React.lazy(() => import('../modal/editor/modalEditor'))
 
 interface CardComponentProps {
   card: CardData
@@ -63,21 +64,23 @@ const CardMenuActionComponent: React.FC<CardMenuActionComponentProps> = ({
             Edit
           </Menu.Item>
 
-          {card.isDone ? (
-            <Menu.Item
-              leftSection={<IconThumbDown size={14} />}
-              onClick={isDoneHandler}
-            >
-              {`Set as "Todo"`}
-            </Menu.Item>
-          ) : (
-            <Menu.Item
-              leftSection={<IconThumbUp size={14} />}
-              onClick={isDoneHandler}
-            >
-              {`Set as "Done"`}
-            </Menu.Item>
-          )}
+          {card.isDone
+            ? (
+                <Menu.Item
+                  leftSection={<IconThumbDown size={14} />}
+                  onClick={isDoneHandler}
+                >
+                  {`Set as "Todo"`}
+                </Menu.Item>
+              )
+            : (
+                <Menu.Item
+                  leftSection={<IconThumbUp size={14} />}
+                  onClick={isDoneHandler}
+                >
+                  {`Set as "Done"`}
+                </Menu.Item>
+              )}
 
           <Menu.Item
             leftSection={<IconTrash size={14} />}
@@ -93,7 +96,8 @@ const CardMenuActionComponent: React.FC<CardMenuActionComponentProps> = ({
           modalHandler={handleCardEditor}
           editCard={card}
           isOpen={openCardEditor}
-        ></ModalEditor>
+        >
+        </ModalEditor>
       </Portal>
     </>
   )
@@ -109,14 +113,14 @@ const CardComponent: React.FC<CardComponentProps> = ({ card }) => {
         style={{ width: 340, height: 400, overflow: 'auto', margin: 'auto' }}
       >
         <Card.Section p={20}>
-          <Group justify="space-between">
+          <Stack justify="space-between">
             <Title
               style={{ textDecoration: card.isDone ? 'line-through' : 'none' }}
             >
               {card.title}
             </Title>
             <CardMenuActionComponent card={card} />
-          </Group>
+          </Stack>
         </Card.Section>
         <Text
           size="sm"
@@ -127,7 +131,7 @@ const CardComponent: React.FC<CardComponentProps> = ({ card }) => {
         <pre>{card.id}</pre>
       </Card>
     ),
-    [card]
+    [card],
   )
 }
 
