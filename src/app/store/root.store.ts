@@ -1,24 +1,30 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { cardReducer } from './card.reducer'
-import { sessionStorageMiddleware } from './sessionStorageMiddleware'
+import { localStorageMiddleware } from './middleware/localStorageMiddleware'
 
 const rootReducer = {
   cards: cardReducer,
 }
 
-const preloadedState = sessionStorage.getItem('todo')
+const preloadedState = localStorage.getItem('todo')
 const defaultState = [
   {
-    title: 'Test Card',
-    body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lacus felis, vehicula vitae diam ut, hendrerit tempor sem. Quisque tristique, ipsum a hendrerit dictum, nisl felis dictum elit, a tempor sapien odio id nunc. ',
+    title: 'Tutorial 1',
+    body: 'Press the button on the bottom right of the page and start taking notes!',
     isDone: false,
     id: '1',
   },
   {
-    title: 'Test Card 2',
-    body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lacus felis, vehicula vitae diam ut, hendrerit tempor sem. Quisque tristique, ipsum a hendrerit dictum, nisl felis dictum elit, a tempor sapien odio id nunc. ',
-    isDone: false,
+    title: 'Tutorial 2',
+    body: 'This is a note marked as "done"',
+    isDone: true,
     id: '2',
+  },
+  {
+    title: 'Test Card 2',
+    body: 'You can edit a note with the three dot menu on this card, or set as "done", or you can say a bitter farewell, deleting it',
+    isDone: false,
+    id: '3',
   },
 ]
 
@@ -26,7 +32,7 @@ export const rootStore = configureStore({
   preloadedState: { cards: preloadedState ? JSON.parse(preloadedState) : { cards: defaultState } },
   reducer: rootReducer,
   middleware: getDefaultMiddleware =>
-    getDefaultMiddleware().concat(sessionStorageMiddleware.middleware),
+    getDefaultMiddleware().concat(localStorageMiddleware.middleware),
 })
 
 export type RootState = ReturnType<typeof rootStore.getState>
