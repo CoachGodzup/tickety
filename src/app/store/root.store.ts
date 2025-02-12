@@ -29,9 +29,13 @@ const defaultState = [
 ]
 
 export const rootStore = configureStore({
-  preloadedState: { cards: preloadedState ? JSON.parse(preloadedState) : { cards: defaultState } },
+  preloadedState: {
+    cards: preloadedState
+      ? JSON.parse(preloadedState)
+      : { cards: defaultState },
+  },
   reducer: rootReducer,
-  middleware: getDefaultMiddleware =>
+  middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(localStorageMiddleware.middleware),
 })
 

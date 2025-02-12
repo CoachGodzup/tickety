@@ -9,9 +9,12 @@ export const ColorSchemeSwitch: React.FC = () => {
       value="light"
       size="xl"
       onChange={toggleColorScheme}
-      onLabel={<IconSun size={20} stroke={2.5} color="var(--mantine-color-yellow-4)" />}
-      offLabel={<IconMoon size={20} stroke={2.5} color="var(--mantine-color-blue-6)" />}
-    >
-    </Switch>
+      onLabel={
+        <IconSun size={20} stroke={2.5} color="var(--mantine-color-yellow-4)" />
+      }
+      offLabel={
+        <IconMoon size={20} stroke={2.5} color="var(--mantine-color-blue-6)" />
+      }
+    ></Switch>
   )
 }
