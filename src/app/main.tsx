@@ -1,6 +1,6 @@
 'use client'
 
-import { AppShell, Burger, Container, Group, Stack } from '@mantine/core'
+import { AppShell, Burger, Container, Group } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import React, { Suspense } from 'react'
 import { ColorSchemeSwitch } from './component/colorSchemeSwitch/colorSchemeSwitch'

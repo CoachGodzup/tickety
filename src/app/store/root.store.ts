@@ -21,7 +21,7 @@ const defaultState = [
     id: '2',
   },
   {
-    title: 'Test Card 2',
+    title: 'Tutorial 3',
     body: 'You can edit a note with the three dot menu on this card, or set as "done", or you can say a bitter farewell, deleting it',
     isDone: false,
     id: '3',

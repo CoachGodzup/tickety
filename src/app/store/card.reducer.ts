@@ -12,11 +12,11 @@ const initialState: CardStore = {
   cards: [],
 }
 
-const sortByAsc = (a: Card, b: Card): -1 | 1 => {
+function sortByAsc(a: Card, b: Card): -1 | 1 {
   return a.title > b.title ? 1 : -1
 }
 
-const sortByDesc = (a: Card, b: Card): -1 | 1 => {
+function sortByDesc(a: Card, b: Card): -1 | 1 {
   return a.title < b.title ? 1 : -1
 }
 
@@ -43,11 +43,9 @@ const cardSlice = createSlice({
     }),
     sortCard: (state: CardStore, action: PayloadAction<{ asc: boolean }>) => ({
       ...state,
-      cards: [
-        ...state.cards.sort((a, b) =>
-          action.payload.asc ? sortByAsc(a, b) : sortByDesc(a, b)
-        ),
-      ],
+      cards: [...state.cards].sort((a, b) =>
+        action.payload.asc ? sortByAsc(a, b) : sortByDesc(a, b)
+      ),
     }),
     editCard: (state: CardStore, action: PayloadAction<Card>) => ({
       ...state,
