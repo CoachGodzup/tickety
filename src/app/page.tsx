@@ -7,6 +7,7 @@ import { MyFooter } from './component/footer/MyFooter'
 import CardList from './component/list/cardList'
 import { Creator } from './component/modal/creator/creator'
 import { Providers } from './providers'
+import { Logo } from './component/logo/logo'
 
 const App: React.FC = () => {
   return (
@@ -14,7 +15,7 @@ const App: React.FC = () => {
       <AppShell header={{ height: 60 }} padding="md">
         <AppShell.Header>
           <Group>
-            <h3 style={{ paddingLeft: '1em' }}>Tickety</h3>
+            <Logo />
             <ColorSchemeSwitch></ColorSchemeSwitch>
           </Group>
         </AppShell.Header>

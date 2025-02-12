@@ -13,7 +13,7 @@ const theme = {}
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <Provider store={rootStore}>
-      <MantineProvider theme={theme} defaultColorScheme="dark">
+      <MantineProvider theme={theme} defaultColorScheme="auto">
         {children}
       </MantineProvider>
     </Provider>
