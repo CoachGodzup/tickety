@@ -12,6 +12,14 @@ const initialState: CardStore = {
   cards: [],
 }
 
+const sortByAsc = (a: Card, b: Card): -1 | 1 => {
+  return a.title > b.title ? 1 : -1
+}
+
+const sortByDesc = (a: Card, b: Card): -1 | 1 => {
+  return a.title < b.title ? 1 : -1
+}
+
 // Create slice
 const cardSlice = createSlice({
   name: 'cards',
@@ -33,6 +41,14 @@ const cardSlice = createSlice({
         ),
       ],
     }),
+    sortCard: (state: CardStore, action: PayloadAction<{ asc: boolean }>) => ({
+      ...state,
+      cards: [
+        ...state.cards.sort((a, b) =>
+          action.payload.asc ? sortByAsc(a, b) : sortByDesc(a, b)
+        ),
+      ],
+    }),
     editCard: (state: CardStore, action: PayloadAction<Card>) => ({
       ...state,
       cards: [
@@ -49,7 +65,8 @@ const cardSlice = createSlice({
 })
 
 // Export actions
-export const { addCard, editCard, toggleCard, removeCard } = cardSlice.actions
+export const { addCard, editCard, sortCard, toggleCard, removeCard } =
+  cardSlice.actions
 
 // Create reducer
 export const cardReducer = cardSlice.reducer

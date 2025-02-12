@@ -1,38 +1,11 @@
-'use client'
-
-import { AppShell, Container, Group } from '@mantine/core'
-import React, { Suspense } from 'react'
-import { ColorSchemeSwitch } from './component/colorSchemeSwitch/colorSchemeSwitch'
-import { MyFooter } from './component/footer/MyFooter'
-import CardList from './component/list/cardList'
-import { Creator } from './component/modal/creator/creator'
+import React from 'react'
+import Main from './main'
 import { Providers } from './providers'
-import { Logo } from './component/logo/logo'
 
 const App: React.FC = () => {
   return (
     <Providers>
-      <AppShell header={{ height: 60 }} padding="md">
-        <AppShell.Header>
-          <Group>
-            <Logo />
-            <ColorSchemeSwitch></ColorSchemeSwitch>
-          </Group>
-        </AppShell.Header>
-
-        <AppShell.Main>
-          <Container fluid>
-            <Suspense fallback="loading...">
-              <CardList></CardList>
-            </Suspense>
-          </Container>
-          <Creator />
-        </AppShell.Main>
-
-        <AppShell.Footer bg="#111" c="#eee" ta="center">
-          <MyFooter></MyFooter>
-        </AppShell.Footer>
-      </AppShell>
+      <Main></Main>
     </Providers>
   )
 }
