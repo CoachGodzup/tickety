@@ -26,7 +26,7 @@ const cardSlice = createSlice({
   initialState,
   reducers: {
     addCard: (state: CardStore, action: PayloadAction<Card>) => {
-      if (state.cards.find((card) => card.id === action.payload.id)) {
+      if (state.cards.find(card => card.id === action.payload.id)) {
         return state
       }
       return { ...state, cards: [...state.cards, action.payload] }
@@ -34,37 +34,37 @@ const cardSlice = createSlice({
     toggleCard: (state: CardStore, action: PayloadAction<{ id: string }>) => ({
       ...state,
       cards: [
-        ...state.cards.map((card) =>
+        ...state.cards.map(card =>
           card.id === action.payload.id
             ? { ...card, isDone: !card.isDone }
-            : card
+            : card,
         ),
       ],
     }),
     sortCard: (state: CardStore, action: PayloadAction<{ asc: boolean }>) => ({
       ...state,
       cards: [...state.cards].sort((a, b) =>
-        action.payload.asc ? sortByAsc(a, b) : sortByDesc(a, b)
+        action.payload.asc ? sortByAsc(a, b) : sortByDesc(a, b),
       ),
     }),
     editCard: (state: CardStore, action: PayloadAction<Card>) => ({
       ...state,
       cards: [
-        ...state.cards.map((card) =>
-          card.id === action.payload.id ? action.payload : card
+        ...state.cards.map(card =>
+          card.id === action.payload.id ? action.payload : card,
         ),
       ],
     }),
     removeCard: (state: CardStore, action: PayloadAction<{ id: string }>) => ({
       ...state,
-      cards: state.cards.filter((card) => card.id !== action.payload.id),
+      cards: state.cards.filter(card => card.id !== action.payload.id),
     }),
   },
 })
 
 // Export actions
-export const { addCard, editCard, sortCard, toggleCard, removeCard } =
-  cardSlice.actions
+export const { addCard, editCard, sortCard, toggleCard, removeCard }
+  = cardSlice.actions
 
 // Create reducer
 export const cardReducer = cardSlice.reducer

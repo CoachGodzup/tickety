@@ -1,3 +1,5 @@
+'use client'
+
 import type { EditorProps } from '../editor/editor'
 import { Modal, Portal } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
@@ -6,7 +8,7 @@ import { CreateCardButton } from './createCardButton'
 
 const Editor = React.lazy(() => import('../editor/editor'))
 
-interface CreatorProps extends EditorProps {}
+type CreatorProps = EditorProps
 
 export const Creator: React.FC<CreatorProps> = ({ onSubmit }) => {
   const [openCardEditor, handleCardEditor] = useDisclosure()

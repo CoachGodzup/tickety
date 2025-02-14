@@ -1,5 +1,6 @@
+'use client'
+
 import type { Card as CardData } from '../../store/card'
-import { removeCard, toggleCard } from '@/app/store/card.reducer'
 import { ActionIcon, Menu, Portal } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import {
@@ -11,6 +12,7 @@ import {
 } from '@tabler/icons-react'
 import React from 'react'
 import { useDispatch } from 'react-redux'
+import { removeCard, toggleCard } from './../../store/card.reducer'
 
 const ModalEditor = React.lazy(() => import('../modal/editor/modalEditor'))
 
@@ -50,21 +52,23 @@ export const CardMenuActionComponent: React.FC<
             Edit
           </Menu.Item>
 
-          {card.isDone ? (
-            <Menu.Item
-              leftSection={<IconThumbDown size={14} />}
-              onClick={isDoneHandler}
-            >
-              {`Set as "Todo"`}
-            </Menu.Item>
-          ) : (
-            <Menu.Item
-              leftSection={<IconThumbUp size={14} />}
-              onClick={isDoneHandler}
-            >
-              {`Set as "Done"`}
-            </Menu.Item>
-          )}
+          {card.isDone
+            ? (
+                <Menu.Item
+                  leftSection={<IconThumbDown size={14} />}
+                  onClick={isDoneHandler}
+                >
+                  {`Set as "Todo"`}
+                </Menu.Item>
+              )
+            : (
+                <Menu.Item
+                  leftSection={<IconThumbUp size={14} />}
+                  onClick={isDoneHandler}
+                >
+                  {`Set as "Done"`}
+                </Menu.Item>
+              )}
 
           <Menu.Item
             leftSection={<IconTrash size={14} />}
@@ -80,7 +84,8 @@ export const CardMenuActionComponent: React.FC<
           modalHandler={handleCardEditor}
           editCard={card}
           isOpen={openCardEditor}
-        ></ModalEditor>
+        >
+        </ModalEditor>
       </Portal>
     </>
   )

@@ -38,7 +38,8 @@ export const ModalEditor: React.FC<ModalEditorProps> = ({
           <Editor
             onSubmit={onSubmitWithModalHandler}
             editCard={editCard}
-          ></Editor>
+          >
+          </Editor>
         </Suspense>
       </Modal.Body>
     </Modal>

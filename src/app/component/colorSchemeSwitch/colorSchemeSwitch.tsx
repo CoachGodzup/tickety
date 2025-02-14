@@ -15,6 +15,7 @@ export const ColorSchemeSwitch: React.FC = () => {
       offLabel={
         <IconMoon size={20} stroke={2.5} color="var(--mantine-color-blue-6)" />
       }
-    ></Switch>
+    >
+    </Switch>
   )
 }

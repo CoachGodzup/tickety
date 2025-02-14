@@ -1,5 +1,5 @@
-import type { Card as CardData } from '@/app/store/card'
-import type { RootState } from '@/app/store/root.store'
+import type { Card as CardData } from './../../store/card'
+import type { RootState } from './../../store/root.store'
 import { ColorSwatch, Group, Stack, Title } from '@mantine/core'
 
 import { ArcElement, Chart as ChartJS, Legend, Tooltip } from 'chart.js'
@@ -26,10 +26,7 @@ const StatDoneNotDone: React.FC = () => {
     datasets: [
       {
         data: [todoCount, notTodoCount],
-        backgroundColor: [
-          COLORS.DONE,
-          COLORS.TODO,
-        ],
+        backgroundColor: [COLORS.DONE, COLORS.TODO],
         borderColor: [COLORS.DONE, COLORS.TODO],
         borderWidth: 1,
       },
@@ -60,7 +57,6 @@ const StatDoneNotDone: React.FC = () => {
         Not Completed
       </Group>
     </Stack>
-
   )
 }
 

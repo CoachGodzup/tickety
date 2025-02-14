@@ -25,7 +25,7 @@ const Main: React.FC = () => {
       padding="md"
     >
       <AppShell.Header>
-        <Group>
+        <Group pl={20}>
           <Burger
             opened={mobileOpened}
             onClick={toggleMobile}

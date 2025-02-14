@@ -41,7 +41,11 @@ const Editor: React.FC<EditorProps> = ({ onSubmit, editCard }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    editCard ? handleEditCard() : handleNewCard()
+    if (editCard) {
+      handleEditCard()
+    } else {
+      handleNewCard()
+    }
     resetForm()
     if (onSubmit) {
       onSubmit()
@@ -56,13 +60,13 @@ const Editor: React.FC<EditorProps> = ({ onSubmit, editCard }) => {
           type="text"
           id="title"
           value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          onChange={e => setTitle(e.target.value)}
         />
         <Textarea
           label="Body"
           id="body"
           value={body}
-          onChange={(e) => setBody(e.target.value)}
+          onChange={e => setBody(e.target.value)}
         />
         <Container style={{ paddingTop: '1em', paddingLeft: '0' }}>
           <Button type="submit">{editCard ? 'Edit Card' : 'Add Card'}</Button>

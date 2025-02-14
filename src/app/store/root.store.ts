@@ -6,7 +6,7 @@ const rootReducer = {
   cards: cardReducer,
 }
 
-const preloadedState = localStorage.getItem('todo')
+const preloadedState = global.window?.localStorage ? localStorage.getItem('todo') : null
 const defaultState = [
   {
     title: 'Tutorial 1',
@@ -35,7 +35,7 @@ export const rootStore = configureStore({
       : { cards: defaultState },
   },
   reducer: rootReducer,
-  middleware: (getDefaultMiddleware) =>
+  middleware: getDefaultMiddleware =>
     getDefaultMiddleware().concat(localStorageMiddleware.middleware),
 })
 

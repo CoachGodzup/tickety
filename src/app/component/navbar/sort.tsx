@@ -1,11 +1,11 @@
-import { sortCard } from '@/app/store/card.reducer'
+'use client'
+
 import { Button } from '@mantine/core'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
+import { sortCard } from './../../store/card.reducer'
 
-interface SortProps {}
-
-const Sort: React.FC<SortProps> = () => {
+const Sort: React.FC = () => {
   const [isAsc, setAsc] = useState(true)
   const dispatch = useDispatch()
 
