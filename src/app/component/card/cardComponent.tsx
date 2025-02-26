@@ -45,9 +45,6 @@ const CardComponent: React.FC<CardComponentProps> = ({ card }) => {
             {card.body}
           </Text>
         </Card.Section>
-        <Card.Section p={20} bottom={0}>
-          <pre style={{ fontSize: '0.7em' }}>{card.id}</pre>
-        </Card.Section>
       </Card>
     ),
     [card],
