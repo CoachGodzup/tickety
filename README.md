@@ -26,8 +26,8 @@ nvm use node
 npm run dev
 ```
 
-If you are a whale lover and you prefer to use [Docker](![Tickety Screenshot](./assets/tickety-screenshot.png)
-), go on and use it!
+If you are a whale lover and you prefer to use [Docker](https://docs.docker.com/get-started/)
+, go on and use it!
 ```bash
 docker compose up
 ```
