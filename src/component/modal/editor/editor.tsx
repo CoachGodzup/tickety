@@ -1,6 +1,6 @@
 'use client'
 
-import type { Card } from '../../../store/card'
+import type { Card } from '../../../model/card'
 import { Button, Container, Textarea, TextInput } from '@mantine/core'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'

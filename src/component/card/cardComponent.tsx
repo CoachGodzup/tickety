@@ -1,4 +1,4 @@
-import type { Card as CardData } from '../../store/card'
+import type { Card as CardData } from '../../model/card'
 import { Card, Group, Text, Title } from '@mantine/core'
 import React, { useMemo } from 'react'
 import { CardMenuActionComponent } from './cardMenuActionComponent'

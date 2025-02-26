@@ -1,6 +1,6 @@
 'use client'
 
-import type { Card } from '../../store/card'
+import type { Card } from '../../model/card'
 import type { RootState } from '../../store/root.store'
 import { Flex } from '@mantine/core'
 import React, { useMemo } from 'react'

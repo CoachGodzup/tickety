@@ -1,6 +1,6 @@
 'use client'
 
-import type { Card as CardData } from '../../store/card'
+import type { Card as CardData } from '../../model/card'
 import { ActionIcon, Menu, Portal } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import {
@@ -12,7 +12,7 @@ import {
 } from '@tabler/icons-react'
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { removeCard, toggleCard } from './../../store/card.reducer'
+import { removeCard, toggleCard } from '../../store/card.reducer'
 
 const ModalEditor = React.lazy(() => import('../modal/editor/modalEditor'))
 

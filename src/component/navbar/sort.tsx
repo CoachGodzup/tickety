@@ -3,7 +3,7 @@
 import { Button } from '@mantine/core'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { sortCard } from './../../store/card.reducer'
+import { sortCard } from '../../store/card.reducer'
 
 const Sort: React.FC = () => {
   const [isAsc, setAsc] = useState(true)

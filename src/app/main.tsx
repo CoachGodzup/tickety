@@ -3,12 +3,12 @@
 import { AppShell, Burger, Container, Group } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import React, { Suspense } from 'react'
-import { ColorSchemeSwitch } from './component/colorSchemeSwitch/colorSchemeSwitch'
-import { MyFooter } from './component/footer/MyFooter'
-import CardList from './component/list/cardList'
-import { Logo } from './component/logo/logo'
-import { Creator } from './component/modal/creator/creator'
-import { Navbar } from './component/navbar/navbar'
+import { ColorSchemeSwitch } from '../component/colorSchemeSwitch/colorSchemeSwitch'
+import { MyFooter } from '../component/footer/MyFooter'
+import CardList from '../component/list/cardList'
+import { Logo } from '../component/logo/logo'
+import { Creator } from '../component/modal/creator/creator'
+import { Navbar } from '../component/navbar/navbar'
 
 const Main: React.FC = () => {
   const [mobileOpened, { toggle: toggleMobile }] = useDisclosure()

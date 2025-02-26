@@ -5,7 +5,7 @@ import { MantineProvider } from '@mantine/core'
 import React from 'react'
 
 import { Provider } from 'react-redux'
-import { rootStore } from './store/root.store'
+import { rootStore } from '../store/root.store'
 import '@mantine/core/styles.css'
 
 const theme = {}

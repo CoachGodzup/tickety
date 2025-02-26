@@ -1,5 +1,5 @@
-import type { Card as CardData } from './../../store/card'
-import type { RootState } from './../../store/root.store'
+import type { Card as CardData } from '../../model/card'
+import type { RootState } from '../../store/root.store'
 import { ColorSwatch, Group, Stack, Title } from '@mantine/core'
 
 import { ArcElement, Chart as ChartJS, Legend, Tooltip } from 'chart.js'
