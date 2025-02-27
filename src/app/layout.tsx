@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 
 import { ColorSchemeScript } from '@mantine/core'
 import { Geist, Geist_Mono } from 'next/font/google'
+
 import React from 'react'
 import './globals.css'
 

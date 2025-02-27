@@ -18,8 +18,8 @@ const StatDoneNotDone: React.FC = () => {
   const cards: CardData[] = useSelector((state: RootState) => state.cards.cards)
 
   // Count todos and not todos
-  const todoCount = cards.filter(card => card.isDone).length
-  const notTodoCount = cards.filter(card => !card.isDone).length
+  const todoCount = cards.filter((card) => card.isDone).length
+  const notTodoCount = cards.filter((card) => !card.isDone).length
 
   const data = {
     labels: ['Completed', 'Not Completed'],

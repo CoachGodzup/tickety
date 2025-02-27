@@ -11,8 +11,8 @@ const CardList: React.FC = () => {
   const cards: Card[] = useSelector((state: RootState) => state.cards.cards)
 
   const cardListElements = useMemo(
-    () => cards.map(card => <CardComponent key={card.id} card={card} />),
-    [cards],
+    () => cards.map((card) => <CardComponent key={card.id} card={card} />),
+    [cards]
   )
 
   return (

@@ -47,7 +47,7 @@ const CardComponent: React.FC<CardComponentProps> = ({ card }) => {
         </Card.Section>
       </Card>
     ),
-    [card],
+    [card]
   )
 }
 
