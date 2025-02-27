@@ -1,21 +1,21 @@
-import { Modal, ModalProps } from '@mantine/core'
+import { Modal, ModalProps, Paper } from '@mantine/core'
 import { MyFooter } from '../footer/MyFooter'
 
 export const About: React.FC<ModalProps> = (props) => (
   <Modal title="Tickety" {...props}>
-    <Modal.Content>
+    <Modal.Body>
       <p>
-        A simple TODO list app that <b>respect your privacy</b>.
+        A simple TODO list app that <b>🥸 respects your privacy</b>.
       </p>
       <ul>
-        <li>No tracking*</li>
+        <li>no tracking*</li>
         <li>no ads</li>
         <li>no data selling</li>
       </ul>
-      <MyFooter />
 
-      <p>* except from Next.js tracking. This will be soon removed.</p>
-    </Modal.Content>
+      <p>* except from Next.js tracking. Those will be soon removed.</p>
+      <MyFooter />
+    </Modal.Body>
   </Modal>
 )
 

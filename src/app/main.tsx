@@ -50,7 +50,7 @@ const Main: React.FC = () => {
             />
             <Logo />
             <ColorSchemeSwitch></ColorSchemeSwitch>
-            <Button component="a" onClick={toggleAbout}>
+            <Button component="a" variant='default' onClick={toggleAbout}>
               About
             </Button>
           </Group>
