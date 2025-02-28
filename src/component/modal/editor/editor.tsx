@@ -60,13 +60,13 @@ const Editor: React.FC<EditorProps> = ({ onSubmit, editCard }) => {
           type="text"
           id="title"
           value={title}
-          onChange={e => setTitle(e.target.value)}
+          onChange={(e) => setTitle(e.target.value)}
         />
         <Textarea
           label="Body"
           id="body"
           value={body}
-          onChange={e => setBody(e.target.value)}
+          onChange={(e) => setBody(e.target.value)}
         />
         <Container style={{ paddingTop: '1em', paddingLeft: '0' }}>
           <Button type="submit">{editCard ? 'Edit Card' : 'Add Card'}</Button>

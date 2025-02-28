@@ -2,7 +2,8 @@ import type { Metadata } from 'next'
 
 import { ColorSchemeScript } from '@mantine/core'
 import { Geist, Geist_Mono } from 'next/font/google'
-import React from 'react'
+
+import React, { Suspense } from 'react'
 import './globals.css'
 
 const geistSans = Geist({
@@ -26,13 +27,16 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" data-mantine-color-scheme="dark">
       <head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="icon" href="/favicon.ico" />
 
-        <ColorSchemeScript defaultColorScheme="dark" />
+
+        <Suspense>
+          <ColorSchemeScript defaultColorScheme="dark" />
+        </Suspense>
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}

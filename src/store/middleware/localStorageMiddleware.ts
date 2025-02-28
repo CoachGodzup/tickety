@@ -8,15 +8,17 @@ import {
   removeCard,
   sortCard,
   toggleCard,
+  uploadCards,
 } from '../card.reducer'
 
 export const localStorageMiddleware = createListenerMiddleware()
 
 localStorageMiddleware.startListening({
-  matcher: isAnyOf(addCard, editCard, sortCard, toggleCard, removeCard),
+  matcher: isAnyOf(addCard, editCard, sortCard, toggleCard, removeCard, uploadCards),
   effect: (_, listenerApi) =>
-    localStorage && localStorage.setItem(
+    localStorage &&
+    localStorage.setItem(
       'todo',
-      JSON.stringify((listenerApi.getState() as RootState).cards),
+      JSON.stringify((listenerApi.getState() as RootState).cards)
     ),
 })
