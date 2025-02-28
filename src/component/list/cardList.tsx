@@ -3,7 +3,7 @@
 import type { Card } from '../../model/card'
 import type { RootState } from '../../store/root.store'
 import { Flex } from '@mantine/core'
-import React, { useMemo } from 'react'
+import React, { Suspense, useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import CardComponent from '../card/cardComponent'
 

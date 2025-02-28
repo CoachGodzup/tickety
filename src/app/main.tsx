@@ -17,6 +17,7 @@ import { Logo } from '../component/logo/logo'
 import { Creator } from '../component/modal/creator/creator'
 import { Navbar } from '../component/navbar/navbar'
 import { About as ModalAbout } from '../component/modal/about'
+import { Download } from '@/component/navbar/download'
 
 const Main: React.FC = () => {
   const [mobileOpened, { toggle: toggleMobile }] = useDisclosure()
@@ -50,9 +51,12 @@ const Main: React.FC = () => {
             />
             <Logo />
             <ColorSchemeSwitch></ColorSchemeSwitch>
-            <Button component="a" variant='default' onClick={toggleAbout}>
+            <Button component="a" variant='transparent' onClick={toggleAbout}>
               About
             </Button>
+            <div style={{ marginLeft: 'auto', marginRight: 20 }}>
+              <Download></Download>
+            </div>
           </Group>
         </AppShell.Header>
 

@@ -59,11 +59,15 @@ const cardSlice = createSlice({
       ...state,
       cards: state.cards.filter((card) => card.id !== action.payload.id),
     }),
+    uploadCards: (state: CardStore, action: PayloadAction<Card[]>) => ({
+      ...state,
+      cards: action.payload,
+    }),
   },
 })
 
 // Export actions
-export const { addCard, editCard, sortCard, toggleCard, removeCard } =
+export const { addCard, editCard, sortCard, toggleCard, removeCard, uploadCards } =
   cardSlice.actions
 
 // Create reducer
