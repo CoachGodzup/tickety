@@ -63,12 +63,23 @@ const cardSlice = createSlice({
       ...state,
       cards: action.payload,
     }),
+    resetCards: (state: CardStore) => ({
+      ...state,
+      cards: [],
+    }),
   },
 })
 
 // Export actions
-export const { addCard, editCard, sortCard, toggleCard, removeCard, uploadCards } =
-  cardSlice.actions
+export const {
+  addCard,
+  editCard,
+  sortCard,
+  toggleCard,
+  removeCard,
+  uploadCards,
+  resetCards,
+} = cardSlice.actions
 
 // Create reducer
 export const cardReducer = cardSlice.reducer

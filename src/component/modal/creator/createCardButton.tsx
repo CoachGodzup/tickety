@@ -1,5 +1,6 @@
-import { Affix, Button } from '@mantine/core'
-import { IconPlus } from '@tabler/icons-react'
+import { ActionIcon, Affix, Button, em } from '@mantine/core'
+import { useMediaQuery } from '@mantine/hooks'
+import { IconEdit, IconPlus } from '@tabler/icons-react'
 
 interface CreateCardButtonProps {
   onClick: () => void
@@ -7,15 +8,24 @@ interface CreateCardButtonProps {
 
 export const CreateCardButton: React.FC<CreateCardButtonProps> = ({
   onClick,
-}) => (
-  <Affix bottom={50} right={0}>
-    <Button
-      leftSection={<IconPlus size={14} />}
-      size="xl"
-      onClick={onClick}
-      style={{ margin: '1em' }}
-    >
-      Create Card
-    </Button>
-  </Affix>
-)
+}) => {
+  const isMobile = useMediaQuery(`(max-width: ${em(750)})`)
+
+  return (
+    <Affix bottom={70} right={10}>
+      <Button
+        visibleFrom="sm"
+        leftSection={<IconPlus size={14} />}
+        size="xl"
+        variant=""
+        onClick={onClick}
+        style={{ margin: '1em' }}
+      >
+        Create Card
+      </Button>
+      <ActionIcon hiddenFrom="sm" size={'xl'} onClick={onClick}>
+        <IconEdit />
+      </ActionIcon>
+    </Affix>
+  )
+}
