@@ -22,7 +22,11 @@ export const Creator: React.FC<CreatorProps> = ({ onSubmit }) => {
 
   return (
     <Portal>
-      <CreateCardButton onClick={handleCardEditor.open} />
+      {openCardEditor ? (
+        <></>
+      ) : (
+        <CreateCardButton onClick={handleCardEditor.open} />
+      )}
       <Modal
         opened={openCardEditor}
         onClose={handleCardEditor.close}
