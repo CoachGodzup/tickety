@@ -66,6 +66,7 @@ const Editor: React.FC<EditorProps> = ({ onSubmit, editCard }) => {
           label="Body"
           id="body"
           value={body}
+          rows={7}
           onChange={(e) => setBody(e.target.value)}
         />
         <Container style={{ paddingTop: '1em', paddingLeft: '0' }}>
