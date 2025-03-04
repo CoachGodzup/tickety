@@ -16,15 +16,14 @@ import CardList from '../component/list/cardList'
 import { Logo } from '../component/logo/logo'
 import { Creator } from '../component/modal/creator/creator'
 import { Navbar } from '../component/navbar/navbar'
-import { About as ModalAbout } from '../component/modal/about'
 import { AllActions } from '../component/navbar/allActions'
-import { useDispatch } from 'react-redux'
+
+const ModalAbout = React.lazy(() => import('../component/modal/about'))
 
 const Main: React.FC = () => {
   const [mobileOpened, { toggle: toggleMobile }] = useDisclosure()
   const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(false)
   const [aboutOpened, { toggle: toggleAbout }] = useDisclosure(false)
-  const dispatch = useDispatch()
 
   return (
     <>
