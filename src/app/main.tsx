@@ -17,7 +17,7 @@ import { Logo } from '../component/logo/logo'
 import { Creator } from '../component/modal/creator/creator'
 import { Navbar } from '../component/navbar/navbar'
 import { About as ModalAbout } from '../component/modal/about'
-import { AllActions } from '@/component/navbar/allActions'
+import { AllActions } from '../component/navbar/allActions'
 import { useDispatch } from 'react-redux'
 
 const Main: React.FC = () => {
