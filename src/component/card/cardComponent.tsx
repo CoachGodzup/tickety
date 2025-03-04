@@ -1,7 +1,7 @@
 'use client'
 
 import type { Card as CardData } from '../../model/card'
-import { Card, Group, Text, Title } from '@mantine/core'
+import { Card, Group, Pill, Text, Title } from '@mantine/core'
 import React, { useMemo } from 'react'
 import { CardMenuActionComponent } from './cardMenuActionComponent'
 
@@ -31,6 +31,13 @@ const CardComponent: React.FC<CardComponentProps> = ({ card }) => (
         >
           {card.title}
         </Title>
+
+        <Pill.Group>
+          {(card.badges || []).map((tag) => (
+            <Pill key={tag}>{tag}</Pill>
+          ))}
+        </Pill.Group>
+
         <CardMenuActionComponent card={card} />
       </Group>
     </Card.Section>

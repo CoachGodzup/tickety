@@ -1,8 +1,8 @@
 'use client'
 
 import type { Card } from '../../../model/card'
-import { Button, Container, Textarea, TextInput } from '@mantine/core'
-import React, { useState } from 'react'
+import { Button, Container, MantineColor, Pill, PillsInput, Textarea, TextInput } from '@mantine/core'
+import React, { KeyboardEventHandler, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { v4 as uuidv4 } from 'uuid'
 import {
@@ -18,15 +18,20 @@ export interface EditorProps {
 const Editor: React.FC<EditorProps> = ({ onSubmit, editCard }) => {
   const [title, setTitle] = useState(editCard ? editCard.title : '')
   const [body, setBody] = useState(editCard ? editCard.body : '')
+  const [color, setColor] = useState<MantineColor | undefined>(editCard?.color || undefined)
+  const [badges, setBadges] = useState<string[]>(editCard?.badges || [])
+  const tagInputRef = useRef<HTMLInputElement>(null)
   const dispatch = useDispatch()
 
   const resetForm = () => {
     setTitle('')
     setBody('')
+    setColor(undefined)
+    setBadges([])
   }
 
   const handleEditCard = () => {
-    dispatch(editCardAction({ ...(editCard as Card), title, body }))
+    dispatch(editCardAction({ ...(editCard as Card), title, body, color, badges }))
   }
 
   const handleNewCard = () => {
@@ -35,12 +40,18 @@ const Editor: React.FC<EditorProps> = ({ onSubmit, editCard }) => {
       title,
       body,
       isDone: false,
+      color: undefined,
+      badges: [],
     }
     dispatch(addCard(newCard))
   }
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
+    debugger;
+    if(tagInputRef.current && tagInputRef.current?.value !== '') {
+      setBadges([...badges, tagInputRef.current.value]);
+    }
     if (editCard) {
       handleEditCard()
     } else {
@@ -49,6 +60,38 @@ const Editor: React.FC<EditorProps> = ({ onSubmit, editCard }) => {
     resetForm()
     if (onSubmit) {
       onSubmit()
+    }
+  }
+
+  const handleBadgesBlur = () => {
+    if(tagInputRef.current && tagInputRef.current?.value !== '') {
+      setBadges([...badges, tagInputRef.current.value]);
+      tagInputRef.current.value = '';
+    }
+  }
+
+  const handleBadges: KeyboardEventHandler<HTMLInputElement> = (e) => {
+    e.preventDefault();
+    console.log(e);
+
+    switch(e.key) {
+      case ' ':
+      case 'Enter':
+        if(e.currentTarget.value.trim() !== '') {
+          setBadges([...badges, e.currentTarget.value]);
+        }
+        e.currentTarget.value = '';
+        break;
+      case 'Backspace':
+        if (e.currentTarget.value === '' && badges.length > 0) {
+          const lastTag = badges[badges.length - 1];
+
+          setBadges(badges.slice(0, -1));
+          e.currentTarget.value = lastTag;
+          break;
+        }
+      default:
+        break;
     }
   }
 
@@ -69,6 +112,15 @@ const Editor: React.FC<EditorProps> = ({ onSubmit, editCard }) => {
           rows={7}
           onChange={(e) => setBody(e.target.value)}
         />
+        <PillsInput
+          label="Badges">
+          <Pill.Group>
+            {badges.map((tag) => (
+              <Pill key={tag}>{tag}</Pill>
+            ))}
+            <PillsInput.Field ref={tagInputRef} aria-label="Badges" onBlur={handleBadgesBlur} onKeyUp={handleBadges} placeholder="Enter badges" />
+          </Pill.Group>
+        </PillsInput>
         <Container style={{ paddingTop: '1em', paddingLeft: '0' }}>
           <Button type="submit">{editCard ? 'Edit Card' : 'Add Card'}</Button>
         </Container>
