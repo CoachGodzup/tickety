@@ -4,12 +4,14 @@ import { configureStore, createSlice } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query'
 
 interface CardStore {
-  cards: Card[]
+  cards: Card[],
+  badges: string[],
 }
 
 // Define initial state
 const initialState: CardStore = {
   cards: [],
+  badges: [],
 }
 
 function sortByAsc(a: Card, b: Card): -1 | 1 {
@@ -18,6 +20,25 @@ function sortByAsc(a: Card, b: Card): -1 | 1 {
 
 function sortByDesc(a: Card, b: Card): -1 | 1 {
   return a.title < b.title ? 1 : -1
+}
+
+const updateCardsAndBadges = (
+  newCards: Card[], 
+  state: CardStore) => ({
+    ...state,
+    cards: [
+      ...newCards,
+    ],
+    badges: refreshBadges(newCards)
+});
+
+const refreshBadges = (cards: Card[]): string[] => {
+  return [
+    ...new Set(
+      cards
+        .flatMap((card) => card.badges)
+        .filter((badge) => badge)
+  )]
 }
 
 // Create slice
@@ -29,17 +50,15 @@ const cardSlice = createSlice({
       if (state.cards.find((card) => card.id === action.payload.id)) {
         return state
       }
-      return { ...state, cards: [...state.cards, action.payload] }
+      return updateCardsAndBadges([...state.cards, action.payload], state)
     },
     toggleCard: (state: CardStore, action: PayloadAction<{ id: string }>) => ({
       ...state,
-      cards: [
-        ...state.cards.map((card) =>
-          card.id === action.payload.id
-            ? { ...card, isDone: !card.isDone }
-            : card
-        ),
-      ],
+      cards: state.cards.map((card) =>
+        card.id === action.payload.id
+          ? { ...card, isDone: !card.isDone }
+          : card
+      ),
     }),
     sortCard: (state: CardStore, action: PayloadAction<{ asc: boolean }>) => ({
       ...state,
@@ -47,25 +66,24 @@ const cardSlice = createSlice({
         action.payload.asc ? sortByAsc(a, b) : sortByDesc(a, b)
       ),
     }),
-    editCard: (state: CardStore, action: PayloadAction<Card>) => ({
-      ...state,
-      cards: [
-        ...state.cards.map((card) =>
-          card.id === action.payload.id ? action.payload : card
-        ),
-      ],
-    }),
-    removeCard: (state: CardStore, action: PayloadAction<{ id: string }>) => ({
-      ...state,
-      cards: state.cards.filter((card) => card.id !== action.payload.id),
-    }),
-    uploadCards: (state: CardStore, action: PayloadAction<Card[]>) => ({
-      ...state,
-      cards: action.payload,
-    }),
+    editCard: (state: CardStore, action: PayloadAction<Card>) => (
+      updateCardsAndBadges(
+        state.cards
+          .map((card) => card.id === action.payload.id ? action.payload : card)
+        , state)
+    ),
+    removeCard: (state: CardStore, action: PayloadAction<{ id: string }>) => (
+      updateCardsAndBadges(
+          state.cards.filter((card) => card.id !== action.payload.id)
+      , state)
+    ),
+    uploadCards: (state: CardStore, action: PayloadAction<Card[]>) => (
+      updateCardsAndBadges(action.payload, state)
+    ),
     resetCards: (state: CardStore) => ({
       ...state,
       cards: [],
+      badges: [],
     }),
   },
 })

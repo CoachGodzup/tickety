@@ -14,18 +14,21 @@ const defaultState = [
     title: 'Tutorial 1',
     body: 'Press the button on the bottom right of the page and start taking notes!',
     isDone: false,
+    badges: ['tutorial'],
     id: '1',
   },
   {
     title: 'Tutorial 2',
     body: 'This is a note marked as "done"',
     isDone: true,
+    badges: ['tutorial'],
     id: '2',
   },
   {
     title: 'Tutorial 3',
     body: 'You can edit a note with the three dot menu on this card, or set as "done", or you can say a bitter farewell, deleting it',
     isDone: false,
+    badges: ['tutorial'],
     id: '3',
   },
 ]
@@ -34,7 +37,10 @@ export const rootStore = configureStore({
   preloadedState: {
     cards: preloadedState
       ? JSON.parse(preloadedState)
-      : { cards: defaultState },
+      : { 
+        cards: defaultState,
+        badges: ['tutorial'],
+       },
   },
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
