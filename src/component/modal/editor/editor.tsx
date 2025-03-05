@@ -48,7 +48,6 @@ const Editor: React.FC<EditorProps> = ({ onSubmit, editCard }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    debugger;
     if(tagInputRef.current && tagInputRef.current?.value !== '') {
       setBadges([...badges, tagInputRef.current.value]);
     }
