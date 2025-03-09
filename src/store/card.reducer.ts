@@ -5,14 +5,16 @@ import { setupListeners } from '@reduxjs/toolkit/query'
 
 interface CardStore {
   cards: Card[],
-  badges: string[],
+  badges: Record<string, number>,
 }
 
 // Define initial state
 const initialState: CardStore = {
   cards: [],
-  badges: [],
+  badges: {},
 }
+
+// TODO: convert badges array into a map of badge to count
 
 function sortByAsc(a: Card, b: Card): -1 | 1 {
   return a.title > b.title ? 1 : -1
@@ -32,13 +34,19 @@ const updateCardsAndBadges = (
     badges: refreshBadges(newCards)
 });
 
-const refreshBadges = (cards: Card[]): string[] => {
-  return [
-    ...new Set(
-      cards
-        .flatMap((card) => card.badges)
+const refreshBadges = (cards: Card[]): Record<string, number> => {
+  return cards
+        .map((card) => card.badges)
+        .flat()
         .filter((badge) => badge)
-  )]
+        .reduce((acc, badge) => {
+          if (!acc[badge]) {
+            acc[badge] = 1
+          } else {
+            acc[badge]++
+          }
+          return acc
+        }, {} as Record<string, number>)
 }
 
 // Create slice
@@ -81,9 +89,7 @@ const cardSlice = createSlice({
       updateCardsAndBadges(action.payload, state)
     ),
     resetCards: (state: CardStore) => ({
-      ...state,
-      cards: [],
-      badges: [],
+      ...initialState
     }),
   },
 })
