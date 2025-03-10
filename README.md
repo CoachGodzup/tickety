@@ -6,6 +6,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 It uses [Mantine library](https://mantine.dev/) for UI and [Redux Toolkit](https://redux-toolkit.js.org/) to manage the state.
 
 ## Screenshot
+
 ![Tickety Screenshot](./assets/tickety-screenshot.png)
 
 ## Feature
@@ -28,12 +29,11 @@ npm run dev
 
 If you are a whale lover and you prefer to use [Docker](https://docs.docker.com/get-started/)
 , go on and use it!
+
 ```bash
 docker compose up
 ```
 
-
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result and... 📌 happy pinning!
-
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.

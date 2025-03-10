@@ -14,7 +14,12 @@ describe('card', () => {
   })
 
   it('should update the isDone property', () => {
-    const card = { id: '2', title: 'Test Title', body: 'Test Body', isDone: false }
+    const card = {
+      id: '2',
+      title: 'Test Title',
+      body: 'Test Body',
+      isDone: false,
+    }
     card.isDone = true
 
     expect(card.isDone).toBe(true)

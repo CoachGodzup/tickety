@@ -1,8 +1,18 @@
 import type { Card } from '../src/app/store/card'
 import { configureStore } from '@reduxjs/toolkit'
-import { addCard, cardReducer, removeCard, toggleCard } from '../src/app/store/card.reducer'
+import {
+  addCard,
+  cardReducer,
+  removeCard,
+  toggleCard,
+} from '../src/app/store/card.reducer'
 
-const createMockCard = (): Card => ({ id: '1', title: 'Test Card', body: 'Test Card', isDone: false })
+const createMockCard = (): Card => ({
+  id: '1',
+  title: 'Test Card',
+  body: 'Test Card',
+  isDone: false,
+})
 
 describe('card Store', () => {
   const store = configureStore({
@@ -21,7 +31,7 @@ describe('card Store', () => {
     store.dispatch(addCard(card))
     store.dispatch(toggleCard({ id: card.id }))
     const state = store.getState()
-    const toggledCard = state.cards.find(c => c.id === card.id)
+    const toggledCard = state.cards.find((c) => c.id === card.id)
     expect(toggledCard?.isDone).toBe(true)
   })
 

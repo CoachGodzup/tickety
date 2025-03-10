@@ -15,11 +15,16 @@ const CardList: React.FC = () => {
   useEffect(() => {
     console.log('CardList rendered', cards)
   }, [cards])
-    
+
   const cardListElements = useMemo(
-    () => cards
-      .filter((card) => filterList.length === 0 || filterList.every(filter => card.badges?.includes(filter)))
-      .map((card) => <CardComponent key={card.id} card={card} />),
+    () =>
+      cards
+        .filter(
+          (card) =>
+            filterList.length === 0 ||
+            filterList.every((filter) => card.badges?.includes(filter))
+        )
+        .map((card) => <CardComponent key={card.id} card={card} />),
     [cards, filterList]
   )
 

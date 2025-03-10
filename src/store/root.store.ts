@@ -37,15 +37,14 @@ export const rootStore = configureStore({
   preloadedState: {
     cards: preloadedState
       ? JSON.parse(preloadedState)
-      : { 
-        cards: defaultState,
-        badges: ['tutorial'],
-       },
+      : {
+          cards: defaultState,
+          badges: ['tutorial'],
+        },
   },
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware()
-      .concat(localStorageMiddleware.middleware)
+    getDefaultMiddleware().concat(localStorageMiddleware.middleware),
 })
 
 export type RootState = ReturnType<typeof rootStore.getState>

@@ -1,4 +1,4 @@
-import { MantineColor } from "@mantine/core"
+import { MantineColor } from '@mantine/core'
 
 export interface Card {
   readonly id: string

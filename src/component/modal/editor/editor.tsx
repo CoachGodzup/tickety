@@ -1,7 +1,15 @@
 'use client'
 
 import type { Card } from '../../../model/card'
-import { Button, Container, MantineColor, Pill, PillsInput, Textarea, TextInput } from '@mantine/core'
+import {
+  Button,
+  Container,
+  MantineColor,
+  Pill,
+  PillsInput,
+  Textarea,
+  TextInput,
+} from '@mantine/core'
 import React, { KeyboardEventHandler, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { v4 as uuidv4 } from 'uuid'
@@ -18,7 +26,9 @@ export interface EditorProps {
 const Editor: React.FC<EditorProps> = ({ onSubmit, editCard }) => {
   const [title, setTitle] = useState(editCard ? editCard.title : '')
   const [body, setBody] = useState(editCard ? editCard.body : '')
-  const [color, setColor] = useState<MantineColor | undefined>(editCard?.color || undefined)
+  const [color, setColor] = useState<MantineColor | undefined>(
+    editCard?.color || undefined
+  )
   const [badges, setBadges] = useState<string[]>(editCard?.badges || [])
   const tagInputRef = useRef<HTMLInputElement>(null)
   const dispatch = useDispatch()
@@ -31,7 +41,9 @@ const Editor: React.FC<EditorProps> = ({ onSubmit, editCard }) => {
   }
 
   const handleEditCard = () => {
-    dispatch(editCardAction({ ...(editCard as Card), title, body, color, badges }))
+    dispatch(
+      editCardAction({ ...(editCard as Card), title, body, color, badges })
+    )
   }
 
   const handleNewCard = () => {
@@ -48,8 +60,8 @@ const Editor: React.FC<EditorProps> = ({ onSubmit, editCard }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    if(tagInputRef.current && tagInputRef.current?.value !== '') {
-      setBadges([...badges, tagInputRef.current.value]);
+    if (tagInputRef.current && tagInputRef.current?.value !== '') {
+      setBadges([...badges, tagInputRef.current.value])
     }
     if (editCard) {
       handleEditCard()
@@ -63,35 +75,35 @@ const Editor: React.FC<EditorProps> = ({ onSubmit, editCard }) => {
   }
 
   const handleBadgesBlur = () => {
-    if(tagInputRef.current && tagInputRef.current?.value !== '') {
-      setBadges([...badges, tagInputRef.current.value]);
-      tagInputRef.current.value = '';
+    if (tagInputRef.current && tagInputRef.current?.value !== '') {
+      setBadges([...badges, tagInputRef.current.value])
+      tagInputRef.current.value = ''
     }
   }
 
   const handleBadges: KeyboardEventHandler<HTMLInputElement> = (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    switch(e.key) {
+    switch (e.key) {
       case ' ':
       case ',':
       case 'Enter':
-        const tag = e.currentTarget.value.trim().toLowerCase();
-        if(tag !== '') {
-          setBadges([...badges, tag]);
+        const tag = e.currentTarget.value.trim().toLowerCase()
+        if (tag !== '') {
+          setBadges([...badges, tag])
         }
-        e.currentTarget.value = '';
-        break;
+        e.currentTarget.value = ''
+        break
       case 'Backspace':
         if (e.currentTarget.value === '' && badges.length > 0) {
-          const lastTag = badges[badges.length - 1];
+          const lastTag = badges[badges.length - 1]
 
-          setBadges(badges.slice(0, -1));
-          e.currentTarget.value = lastTag;
-          break;
+          setBadges(badges.slice(0, -1))
+          e.currentTarget.value = lastTag
+          break
         }
       default:
-        break;
+        break
     }
   }
 
@@ -112,13 +124,18 @@ const Editor: React.FC<EditorProps> = ({ onSubmit, editCard }) => {
           rows={7}
           onChange={(e) => setBody(e.target.value)}
         />
-        <PillsInput
-          label="Badges">
+        <PillsInput label="Badges">
           <Pill.Group>
             {badges.map((tag) => (
               <Pill key={tag}>{tag}</Pill>
             ))}
-            <PillsInput.Field ref={tagInputRef} aria-label="Badges" onBlur={handleBadgesBlur} onKeyUp={handleBadges} placeholder="Enter badges" />
+            <PillsInput.Field
+              ref={tagInputRef}
+              aria-label="Badges"
+              onBlur={handleBadgesBlur}
+              onKeyUp={handleBadges}
+              placeholder="Enter badges"
+            />
           </Pill.Group>
         </PillsInput>
         <Container style={{ paddingTop: '1em', paddingLeft: '0' }}>

@@ -1,10 +1,4 @@
-import {
-  Button,
-  Title,
-  Text,
-  ButtonGroup,
-  Card,
-} from '@mantine/core'
+import { Button, Title, Text, ButtonGroup, Card } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import { ActionButtonProps } from './actionButtonMobile'
 
