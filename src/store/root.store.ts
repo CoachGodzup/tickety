@@ -44,7 +44,8 @@ export const rootStore = configureStore({
   },
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(localStorageMiddleware.middleware),
+    getDefaultMiddleware()
+      .concat(localStorageMiddleware.middleware)
 })
 
 export type RootState = ReturnType<typeof rootStore.getState>

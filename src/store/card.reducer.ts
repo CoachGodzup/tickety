@@ -39,6 +39,7 @@ const refreshBadges = (cards: Card[]): Record<string, number> => {
         .map((card) => card.badges)
         .flat()
         .filter((badge) => badge)
+        .map((badge) => badge.toLowerCase().trim())
         .reduce((acc, badge) => {
           if (!acc[badge]) {
             acc[badge] = 1

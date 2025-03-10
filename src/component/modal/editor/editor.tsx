@@ -41,7 +41,7 @@ const Editor: React.FC<EditorProps> = ({ onSubmit, editCard }) => {
       body,
       isDone: false,
       color: undefined,
-      badges: [],
+      badges: badges,
     }
     dispatch(addCard(newCard))
   }
@@ -71,13 +71,14 @@ const Editor: React.FC<EditorProps> = ({ onSubmit, editCard }) => {
 
   const handleBadges: KeyboardEventHandler<HTMLInputElement> = (e) => {
     e.preventDefault();
-    console.log(e);
 
     switch(e.key) {
       case ' ':
+      case ',':
       case 'Enter':
-        if(e.currentTarget.value.trim() !== '') {
-          setBadges([...badges, e.currentTarget.value]);
+        const tag = e.currentTarget.value.trim().toLowerCase();
+        if(tag !== '') {
+          setBadges([...badges, tag]);
         }
         e.currentTarget.value = '';
         break;
