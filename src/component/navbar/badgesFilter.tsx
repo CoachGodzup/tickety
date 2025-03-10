@@ -7,7 +7,7 @@ import { Suspense } from "react";
 import { useSelector } from "react-redux";
 
 export const BadgesFilter: React.FC = () => {
-    const badges = useSelector((state: RootState) => state.cards.badges);
+    const badges = useSelector((state: RootState) => state.cards.badges) || [];
     const filterStore = useFilterStore((state) => state);
 
     const changeFilter = (badge: string) => {
